@@ -21,6 +21,17 @@ class Index extends Backend
 
     public function _initialize()
     {
+        //一二级菜单切换按钮处理逻辑
+        $act = $this->request->get('act');
+        $multiplenav = cookie('multiplenav');
+        if ($act == 'switch-multiplenav-off') {
+            cookie('multiplenav', null);
+        } else if ($act == 'switch-multiplenav-on' || $multiplenav) {
+            if (!$multiplenav) {
+                cookie('multiplenav', true);
+            }
+            config('fastadmin.multiplenav', true);
+        }
         parent::_initialize();
     }
 
@@ -34,7 +45,6 @@ class Index extends Backend
             'dashboard' => 'hot',
             'addon'     => ['new', 'red', 'badge'],
             'auth/rule' => __('Menu'),
-            'general'   => ['new', 'purple'],
         ], $this->view->site['fixedpage']);
         $action = $this->request->request('action');
         if ($this->request->isPost()) {

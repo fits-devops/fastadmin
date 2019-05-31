@@ -90,7 +90,7 @@ p {
     background-color: transparent;
 }
 .navbar-default .navbar-header .navbar-brand {
-    padding-top:3px;
+    padding-top:8px;
 }
 @media (min-width: 768px) {
     .navbar-default {
