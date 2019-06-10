@@ -1,6 +1,6 @@
 <?php
 /**
- * FastAdmin安装程序
+ * FitsAdmin安装程序
  *
  * 安装完成后建议删除此文件
  * @author Karson
@@ -34,7 +34,7 @@ function is_really_writable($file)
     return TRUE;
 }
 
-$sitename = "FastAdmin";
+$sitename = "FitsAdmin";
 
 $link = array(
     'qqun'  => "https://jq.qq.com/?_wv=1027&amp;k=487PNBb",
@@ -103,7 +103,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     $mysqlUsername = isset($_POST['mysqlUsername']) ? $_POST['mysqlUsername'] : 'root';
     $mysqlPassword = isset($_POST['mysqlPassword']) ? $_POST['mysqlPassword'] : '';
-    $mysqlDatabase = isset($_POST['mysqlDatabase']) ? $_POST['mysqlDatabase'] : 'fastadmin';
+    $mysqlDatabase = isset($_POST['mysqlDatabase']) ? $_POST['mysqlDatabase'] : 'fitsadmin';
     $mysqlPrefix = isset($_POST['mysqlPrefix']) ? $_POST['mysqlPrefix'] : 'fa_';
     $adminUsername = isset($_POST['adminUsername']) ? $_POST['adminUsername'] : 'admin';
     $adminPassword = isset($_POST['adminPassword']) ? $_POST['adminPassword'] : '123456';
@@ -357,7 +357,7 @@ if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 <div class="form-field">
                     <label>MySQL 数据库名</label>
-                    <input type="text" name="mysqlDatabase" value="fastadmin" required="">
+                    <input type="text" name="mysqlDatabase" value="fitsadmin" required="">
                 </div>
 
                 <div class="form-field">

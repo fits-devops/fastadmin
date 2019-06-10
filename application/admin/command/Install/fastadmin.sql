@@ -559,6 +559,8 @@ CREATE TABLE `fa_user_token` (
 DROP TABLE IF EXISTS `fa_version`;
 CREATE TABLE `fa_version`  (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `type` enum('addon','agent') NOT NULL COMMENT '类型: addon=服务器插件,agent=客户端插件',
+  `name` varchar(30) NOT NULL DEFAULT '' COMMENT '标识',
   `oldversion` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '旧版本号',
   `newversion` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '新版本号',
   `packagesize` varchar(30) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '包大小',
@@ -576,7 +578,7 @@ CREATE TABLE `fa_version`  (
 -- Table structure for fa_version
 -- ----------------------------
 BEGIN;
-INSERT INTO `fa_version` (`id`, `oldversion`, `newversion`, `packagesize`, `content`, `downloadurl`, `enforce`, `createtime`, `updatetime`, `weigh`, `status`) VALUES
-(1, '1.1.1,2', '1.2.1', '20M', '更新内容', 'https://www.fastadmin.net/download.html', 1, 1520425318, 0, 0, 'normal');
+INSERT INTO `fa_version` (`id`,`type`,`name`,`oldversion`, `newversion`, `packagesize`, `content`, `downloadurl`, `enforce`, `createtime`, `updatetime`, `weigh`, `status`) VALUES
+(1,'addon','version','1.1.1,2', '1.2.1', '20M', '更新内容', 'https://www.fastadmin.net/download.html', 1, 1520425318, 0, 0, 'normal');
 COMMIT;
 SET FOREIGN_KEY_CHECKS = 1;

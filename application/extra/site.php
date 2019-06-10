@@ -1,7 +1,7 @@
 <?php
 
 return array (
-  'name' => 'iAdmin',
+  'name' => 'FitsAdmin',
   'beian' => '',
   'cdnurl' => '',
   'version' => '1.0.1',
