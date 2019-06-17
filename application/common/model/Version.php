@@ -79,4 +79,42 @@ class Version extends Model
         }
         return null;
     }
+
+
+    /**
+     * 按名称分组，获取当前版本、版本列表信息
+     * @param null $name
+     * @return array
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public static function getVersionInfoByName($name = null)
+    {
+        $versionInfo = [];
+
+        $versionlist = collection(self::where(function ($query) use ($name) {
+            if(!is_null($name)){
+                $query->where('name', '=', $name);
+            }
+        })->where('status','=','normal')->select());
+
+        $versionGroup = array_group_by($versionlist,'name');
+
+        foreach ($versionGroup as $k => $v){
+            $version = '0';
+            foreach ($v as $item){
+                if ($item['newversion'] > $version){
+                    $version = $item['newversion'];
+                }
+            }
+            $versionInfo[$k] = [
+                "name" => $k,
+                "version" => $version,
+                "releaselist" => $v
+            ];
+        }
+
+        return $versionInfo;
+    }
 }

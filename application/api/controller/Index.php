@@ -13,8 +13,10 @@ class Index extends Api
     protected $noNeedRight = ['*'];
 
     /**
-     * 首页
-     *
+     * @ApiTitle    (首页)
+     * @ApiSummary  (获取首页信息)
+     * @ApiMethod   (GET)
+     * @ApiRoute    (/api/index/index)
      */
     public function index()
     {

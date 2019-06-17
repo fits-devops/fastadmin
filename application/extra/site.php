@@ -19,6 +19,7 @@ return array (
     'page' => 'Page',
     'article' => 'Article',
     'test' => 'Test',
+    'addonstore' => 'Addonstore',
   ),
   'configgroup' => 
   array (
