@@ -4,16 +4,16 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
             // 初始化表格参数配置
             Table.api.init({
                 extend: {
-                    index_url: Config.fastadmin.api_url + '/addon/index',
+                    //index_url: Config.fastadmin.api_url + '/addon/index',
+                    index_url: Config.fastadmin.api_addonstore + '/admin/addonstore/getAddonsList',
+                    //index_url: 'http://www.demofitsadmin.com/api/addon/index',
                     add_url: '',
                     edit_url: '',
                     del_url: '',
                     multi_url: ''
                 }
             });
-
             var table = $("#table");
-
             table.on('load-success.bs.table', function (e, json) {
                 if (json && typeof json.category != 'undefined' && $(".nav-category li").size() == 2) {
                     $.each(json.category, function (i, j) {
@@ -87,22 +87,22 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
                             width: '100px',
                             formatter: Controller.api.formatter.author
                         },
-                        {
-                            field: 'price',
-                            title: __('Price'),
-                            operate: 'LIKE',
-                            width: '100px',
-                            align: 'center',
-                            formatter: Controller.api.formatter.price
-                        },
-                        {
-                            field: 'downloads',
-                            title: __('Downloads'),
-                            operate: 'LIKE',
-                            width: '80px',
-                            align: 'center',
-                            formatter: Controller.api.formatter.downloads
-                        },
+                        //{
+                        //    field: 'price',
+                        //    title: __('Price'),
+                        //    operate: 'LIKE',
+                        //    width: '100px',
+                        //    align: 'center',
+                        //    formatter: Controller.api.formatter.price
+                        //},
+                        //{
+                        //    field: 'downloads',
+                        //    title: __('Downloads'),
+                        //    operate: 'LIKE',
+                        //    width: '80px',
+                        //    align: 'center',
+                        //    formatter: Controller.api.formatter.downloads
+                        //},
                         {
                             field: 'version',
                             title: __('Version'),
@@ -169,19 +169,27 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
                     return false;
                 }
             });
-
+            var $addonurl = '';
             // 切换
             $(document).on("click", ".btn-switch", function () {
                 $(".btn-switch").removeClass("active");
                 $(this).addClass("active");
                 $("form.form-commonsearch input[name='type']").val($(this).data("type"));
-                table.bootstrapTable('refresh', {url: $(this).data("url"), pageNumber: 1});
+                if($(this).data("url") != 'addon/downloaded'){
+                    $addonurl = Config.fastadmin.api_addonstore + '/admin/addonstore/getAddonsList';
+                }else{
+                    $addonurl = $(this).data("url");
+                }
+                //console.log($(this).data("url"));
+                //console.log($addonurl);
+                //table.bootstrapTable('refresh', {url: $(this).data("url"), pageNumber: 1});
+                table.bootstrapTable('refresh', {url: $addonurl, pageNumber: 1});
                 return false;
             });
             $(document).on("click", ".nav-category li a", function () {
                 $(".nav-category li").removeClass("active");
                 $(this).parent().addClass("active");
-                $("form.form-commonsearch input[name='category_id']").val($(this).data("id"));
+                $("form.form-commonsearch input[name='category_id']").val(15);
                 table.bootstrapTable('refresh', {url: $(this).data("url"), pageNumber: 1});
                 return false;
             });
@@ -262,7 +270,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
                 }
             });
 
-            var install = function (name, version, force) {
+            var install = function (name, version, force,downurl) {
                 var userinfo = Controller.api.userinfo.get();
                 var uid = userinfo ? userinfo.id : 0;
                 var token = userinfo ? userinfo.token : '';
@@ -274,6 +282,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
                         uid: uid,
                         token: token,
                         version: version,
+                        downurl: downurl,
                         faversion: Config.fastadmin.version
                     }
                 }, function (data, ret) {
@@ -328,7 +337,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
 
                             },
                             yes: function () {
-                                install(name, version, true);
+                                install(name, version, true,downurl);
                             }
                         });
 
@@ -406,13 +415,20 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
                 });
             };
 
-            var upgrade = function (name, version) {
+            var upgrade = function (name, version, downurl) {
                 var userinfo = Controller.api.userinfo.get();
                 var uid = userinfo ? userinfo.id : 0;
                 var token = userinfo ? userinfo.token : '';
                 Fast.api.ajax({
                     url: 'addon/upgrade',
-                    data: {name: name, uid: uid, token: token, version: version, faversion: Config.fastadmin.version}
+                    data: {
+                        name: name,
+                        uid: uid,
+                        token: token,
+                        version: version,
+                        downurl: downurl,
+                        faversion: Config.fastadmin.version
+                    }
                 }, function (data, ret) {
                     Config['addons'][name].version = version;
                     Layer.closeAll();
@@ -429,7 +445,8 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
                 var that = this;
                 var name = $(this).closest(".operate").data("name");
                 var version = $(this).data("version");
-
+                //获取下载地址
+                var downurl= $(this).attr('data_down_url');
                 var userinfo = Controller.api.userinfo.get();
                 var uid = userinfo ? userinfo.id : 0;
 
@@ -442,12 +459,12 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
                                 $(".btn-userinfo").trigger("click");
                             },
                             btn2: function () {
-                                install(name, version, false);
+                                install(name, version, false, downurl);
                             }
                         });
                     }
                 }
-                install(name, version, false);
+                install(name, version, false, downurl);
             });
 
             // 点击卸载
@@ -478,6 +495,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
             // 点击升级
             $(document).on("click", ".btn-upgrade", function () {
                 var name = $(this).closest(".operate").data('name');
+                var downurl= $(this).attr('data_down_url');
                 if (Config['addons'][name].state == 1) {
                     Layer.alert(__('Please disable addon first'), {icon: 7});
                     return false;
@@ -485,7 +503,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
                 var version = $(this).data("version");
 
                 Layer.confirm(__('Upgrade tips', Config['addons'][name].title), function () {
-                    upgrade(name, version);
+                    upgrade(name, version, downurl);
                 });
             });
 
@@ -535,20 +553,20 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
                 author: function (value, row, index) {
                     return '<a href="https://wpa.qq.com/msgrd?v=3&uin=' + row.qq + '&site=fastadmin.net&menu=yes" target="_blank" data-toggle="tooltip" title="' + __('Click to contact developer') + '" class="text-primary">' + value + '</a>';
                 },
-                price: function (value, row, index) {
-                    if (isNaN(value)) {
-                        return value;
-                    }
-                    return parseFloat(value) == 0 ? '<span class="text-success">' + __('Free') + '</span>' : '<span class="text-danger">￥' + value + '</span>';
-                },
-                downloads: function (value, row, index) {
-                    return value;
-                },
+                //price: function (value, row, index) {
+                //    if (isNaN(value)) {
+                //        return value;
+                //    }
+                //    return parseFloat(value) == 0 ? '<span class="text-success">' + __('Free') + '</span>' : '<span class="text-danger">￥' + value + '</span>';
+                //},
+                //downloads: function (value, row, index) {
+                //    return value;
+                //},
                 version: function (value, row, index) {
                     return row.addon && row.addon.version != row.version ? '<a href="' + row.url + '?version=' + row.version + '" target="_blank"><span class="releasetips text-primary" data-toggle="tooltip" title="' + __('New version tips', row.version) + '">' + row.addon.version + '<i></i></span></a>' : row.version;
                 },
                 home: function (value, row, index) {
-                    return row.addon ? '<a href="' + row.addon.url + '" data-toggle="tooltip" title="' + __('View addon index page') + '" target="_blank"><i class="fa fa-home text-primary"></i></a>' : '<a href="javascript:;"><i class="fa fa-home text-gray"></i></a>';
+                    return row.addon ? '<a href="' + row.addon.url + '" data-to ggle="tooltip" title="' + __('View addon index page') + '" target="_blank"><i class="fa fa-home text-primary"></i></a>' : '<a href="javascript:;"><i class="fa fa-home text-gray"></i></a>';
                 },
             },
             bindevent: function () {

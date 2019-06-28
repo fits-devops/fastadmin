@@ -110,11 +110,14 @@ class Addon extends Backend
             $token = $this->request->post("token");
             $version = $this->request->post("version");
             $faversion = $this->request->post("faversion");
+            //获取下载地址
+            $downurl = $this->request->post("downurl");
             $extend = [
                 'uid'       => $uid,
                 'token'     => $token,
                 'version'   => $version,
-                'faversion' => $faversion
+                'faversion' => $faversion,
+                'downurl' => $downurl,
             ];
             Service::install($name, $force, $extend);
             $info = get_addon_info($name);
@@ -259,11 +262,12 @@ class Addon extends Backend
             $token = $this->request->post("token");
             $version = $this->request->post("version");
             $faversion = $this->request->post("faversion");
+            $downurl = $this->request->post("downurl");
             $extend = [
                 'uid'       => $uid,
                 'token'     => $token,
                 'version'   => $version,
-                'faversion' => $faversion
+                'downurl' => $downurl
             ];
             //调用更新的方法
             Service::upgrade($name, $extend);
@@ -289,9 +293,11 @@ class Addon extends Backend
         $onlineaddons = Cache::get("onlineaddons");
         if (!is_array($onlineaddons)) {
             $onlineaddons = [];
-            $result = Http::sendRequest(config('fastadmin.api_url') . '/addon/index');
+//            $result = Http::sendRequest(config('fastadmin.api_url') . '/addon/index');
+            $result =Http::sendRequest(config('fastadmin.api_addonstore').'/api/addon/index');
             if ($result['ret']) {
-                $json = (array)json_decode($result['msg'], true);
+                $data = (array)json_decode($result['msg'], true);
+                $json = ($data['data']);
                 $rows = isset($json['rows']) ? $json['rows'] : [];
                 foreach ($rows as $index => $row) {
                     $onlineaddons[$row['name']] = $row;

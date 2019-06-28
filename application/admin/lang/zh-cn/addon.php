@@ -14,6 +14,7 @@ return [
     'Refresh addon cache'            => '刷新插件缓存',
     'Userinfo'                       => '会员信息',
     'Online store'                   => '在线商店',
+    'Online addon'                   => '在线安装',
     'Local addon'                    => '本地插件',
     'Conflict tips'                  => '此插件中发现和现有系统中部分文件发现冲突！以下文件将会被影响，请备份好相关文件后再继续操作',
     'Login tips'                     => '此处登录账号为<a href="https://www.fastadmin.net" target="_blank">FastAdmin官网账号</a>',

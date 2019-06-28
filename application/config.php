@@ -275,5 +275,7 @@ return [
         'version'             => '1.0.0.20190510_beta',
         //API接口地址
         'api_url'             => 'https://api.fastadmin.net',
+        //插件商店接口
+        'api_addonstore'     => 'http://www.demofitsadmin.com',
     ],
 ];
