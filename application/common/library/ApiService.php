@@ -7,6 +7,7 @@ use think\addons\Service;
 use fast\Http;
 use think\Db;
 use think\Exception;
+use think\addons\AddonException;
 
 /**
  * Token操作类
