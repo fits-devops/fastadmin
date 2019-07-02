@@ -236,7 +236,7 @@
         <span class="btn-group">
                 <a href="javascript:;" class="btn btn-xs btn-primary btn-success btn-install"
                    data-type="<%=item.price<=0?'free':'price';%>" data-donateimage="<%=item.donateimage%>"
-                   data-version="<%=item.version%>" data_down_url="<%=item.releaselist[0].downloadurl%>"><i class="fa fa-cloud-download"></i> {:__('Install')}</a>
+                   data-version="<%=item.version%>" data-down-url="<%=item.releaselist[0].downloadurl%>"><i class="fa fa-cloud-download"></i> {:__('Install')}</a>
                 <a class="btn btn-xs btn-success dropdown-toggle" data-toggle="dropdown" href="javascript:;">
                     <span class="fa fa-caret-down"></span>
                 </a>
@@ -245,7 +245,7 @@
                     <li><a href="javascript:;" class="btn-install" data-type="<%=item.price<=0?'free':'price';%>"
                            data-donateimage="<%=item.donateimage%>"
                            data-version="<%=item.releaselist[j].version%>"
-                           data_down_url="<%=item.releaselist[j].downloadurl%>"
+                           data-down-url="<%=item.releaselist[j].downloadurl%>"
                     ><%=item.releaselist[j].version%></a></li>
                     <% } %>
                 </ul>
@@ -253,7 +253,7 @@
         <% }else{%>
         <a href="javascript:;" class="btn btn-xs btn-primary btn-success btn-install"
            data-type="<%=item.price<=0?'free':'price';%>" data-donateimage="<%=item.donateimage%>"
-           data-version="<%=item.version%>"><i class="fa fa-cloud-download"></i> {:__('Install')}</a>
+           data-version="<%=item.version%>" data-down-url="<%=item.releaselist[0].downloadurl%>"><i class="fa fa-cloud-download"></i> {:__('Install')}</a>
         <% } %>
 
         <% if(item.demourl){ %>
@@ -266,7 +266,7 @@
         <% if(typeof item.releaselist !="undefined" && item.releaselist.length>1){%>
         <span class="btn-group">
                                 <a href="javascript:;" class="btn btn-xs btn-info btn-success btn-upgrade"
-                                   data-version="<%=item.version%>" data_down_url="<%=item.releaselist[0].downloadurl%>"><i class="fa fa-cloud"></i> {:__('Upgrade')}</a>
+                                   data-version="<%=item.version%>" data-down-url="<%=item.releaselist[0].downloadurl%>"><i class="fa fa-cloud"></i> {:__('Upgrade')}</a>
                                 <a class="btn btn-xs btn-info dropdown-toggle" data-toggle="dropdown"
                                    href="javascript:;">
                                     <span class="fa fa-caret-down"></span>
