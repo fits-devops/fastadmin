@@ -6,6 +6,7 @@ use app\common\controller\Backend;
 use fast\Http;
 use think\addons\AddonException;
 use think\addons\Service;
+use app\common\library\ApiService;
 use think\Cache;
 use think\Config;
 use think\Exception;
@@ -119,7 +120,7 @@ class Addon extends Backend
                 'faversion' => $faversion,
                 'downurl' => $downurl,
             ];
-            Service::install($name, $force, $extend);
+            ApiService::install($name, $force, $extend);
             $info = get_addon_info($name);
             $info['config'] = get_addon_config($name) ? 1 : 0;
             $info['state'] = 1;
@@ -270,7 +271,7 @@ class Addon extends Backend
                 'downurl' => $downurl
             ];
             //调用更新的方法
-            Service::upgrade($name, $extend);
+            ApiService::upgrade($name, $extend);
             Cache::rm('__menu__');
             $this->success(__('Operate successful'));
         } catch (AddonException $e) {

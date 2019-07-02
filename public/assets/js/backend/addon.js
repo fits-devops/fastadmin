@@ -179,9 +179,6 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
                 }else{
                     $addonurl = $(this).data("url");
                 }
-                //console.log($(this).data("url"));
-                //console.log($addonurl);
-                //table.bootstrapTable('refresh', {url: $(this).data("url"), pageNumber: 1});
                 table.bootstrapTable('refresh', {url: $addonurl, pageNumber: 1});
                 return false;
             });
@@ -189,9 +186,6 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
                 $(".nav-category li").removeClass("active");
                 $(this).parent().addClass("active");
                 $testid = $("form.form-commonsearch input[name='category_id']").val($(this).data("id"));
-                console.log($(this).data("id"));
-                console.log($(this).data("url"));
-                //var $category = getAttrs('category-id');
                 table.bootstrapTable('refresh', {url: $(this).data("url"), pageNumber: 1});
                 return false;
             });
