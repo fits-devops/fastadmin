@@ -73,7 +73,6 @@ return [
     'Index'                                                 => '首页',
     'Hot'                                                   => '热门',
     'Recommend'                                             => '推荐',
-    'Dashboard'                                             => '控制台',
     'Upload'                                                => '上传',
     'Uploading'                                             => '上传中',
     'Code'                                                  => '编号',

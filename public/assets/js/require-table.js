@@ -103,6 +103,9 @@ define(['jquery', 'bootstrap', 'moment', 'moment/locale/zh-cn', 'bootstrap-table
                         return __('Choose');
                     }
                 }, locales);
+                if (typeof defaults.exportTypes != 'undefined') {
+                    $.fn.bootstrapTable.defaults.exportTypes = defaults.exportTypes;
+                }
             },
             // 绑定事件
             bindevent: function (table) {
@@ -171,7 +174,7 @@ define(['jquery', 'bootstrap', 'moment', 'moment/locale/zh-cn', 'bootstrap-table
                     var field = $(this).closest("ul").data("field");
                     var value = $(this).data("value");
                     $("select[name='" + field + "'] option[value='" + value + "']", table.closest(".bootstrap-table").find(".commonsearch-table")).prop("selected", true);
-                    table.bootstrapTable('refresh', {});
+                    table.bootstrapTable('refresh', {pageNumber: 1});
                     return false;
                 });
                 // 刷新按钮事件
@@ -277,7 +280,8 @@ define(['jquery', 'bootstrap', 'moment', 'moment/locale/zh-cn', 'bootstrap-table
                                     pid: pid,
                                     field: Table.config.dragsortfield,
                                     orderway: options.sortOrder,
-                                    table: options.extend.table
+                                    table: options.extend.table,
+                                    pk: options.pk
                                 }
                             };
                             Fast.api.ajax(params, function (data, ret) {
@@ -409,6 +413,7 @@ define(['jquery', 'bootstrap', 'moment', 'moment/locale/zh-cn', 'bootstrap-table
                         });
                         Layer.photos({
                             photos: {
+                                "start": $(this).parent().index(),
                                 "data": data
                             },
                             anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
