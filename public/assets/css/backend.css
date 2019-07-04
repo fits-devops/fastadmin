@@ -997,4 +997,8 @@ table.table-nowrap thead > tr > th {
 .btn-switcher .text-gray {
   color: #d2d6de !important;
 }
+/*修改按钮下弹出框最小长度*/
+.dropdown-menu {
+  min-width: 67px;
+}
 /*# sourceMappingURL=../css/backend.css.map */

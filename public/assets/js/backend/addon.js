@@ -122,7 +122,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
                             align: 'center',
                             table: table,
                             formatter: Controller.api.formatter.operate,
-                            align: 'left'
+                            align: 'right'
                         },
                     ]
                 ],
