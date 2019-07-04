@@ -10,7 +10,7 @@ use think\Exception;
 use think\addons\AddonException;
 
 /**
- * Token操作类
+ * 更改插件服务
  */
 class ApiService extends Service
 {
