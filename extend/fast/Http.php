@@ -11,52 +11,26 @@ class Http
     /**
      * 发送一个POST请求
      * @param string $url     请求URL
-     * @param mixed  $params  请求参数
+     * @param array  $params  请求参数
      * @param array  $options 扩展参数
      * @return mixed|string
      */
-    public static function post($url, $params = [], $options = [],$header=[])
+    public static function post($url, $params = [], $options = [])
     {
-        $req = self::sendRequest($url, $params, 'POST', $options,$header);
+        $req = self::sendRequest($url, $params, 'POST', $options);
         return $req['ret'] ? $req['msg'] : '';
     }
 
     /**
      * 发送一个GET请求
      * @param string $url     请求URL
-     * @param mixed  $params  请求参数
+     * @param array  $params  请求参数
      * @param array  $options 扩展参数
      * @return mixed|string
      */
-    public static function get($url, $params = [], $options = [],$header=[])
+    public static function get($url, $params = [], $options = [])
     {
-        $req = self::sendRequest($url, $params, 'GET', $options ,$header);
-        return $req['ret'] ? $req['msg'] : '';
-    }
-
-    /**
-     * 发送一个PUT请求
-     * @param string $url     请求URL
-     * @param mixed  $params  请求参数
-     * @param array  $options 扩展参数
-     * @return mixed|string
-     */
-    public static function put($url, $params = [], $options = [],$header=[])
-    {
-        $req = self::sendRequest($url, $params, 'PUT', $options,$header);
-        return $req['ret'] ? $req['msg'] : '';
-    }
-
-    /**
-     * 发送一个DELETE请求
-     * @param string $url     请求URL
-     * @param mixed  $params  请求参数
-     * @param array  $options 扩展参数
-     * @return mixed|string
-     */
-    public static function del($url, $params = [], $options = [],$header=[])
-    {
-        $req = self::sendRequest($url, $params, 'DELETE', $options,$header);
+        $req = self::sendRequest($url, $params, 'GET', $options);
         return $req['ret'] ? $req['msg'] : '';
     }
 
@@ -66,10 +40,9 @@ class Http
      * @param mixed  $params  传递的参数
      * @param string $method  请求的方法
      * @param mixed  $options CURL的参数
-     * @param mixed  $header 头部参数
      * @return array
      */
-    public static function sendRequest($url, $params = [], $method = 'POST', $options = [],$header = [])
+    public static function sendRequest($url, $params = [], $method = 'POST', $options = [])
     {
         $method = strtoupper($method);
         $protocol = substr($url, 0, 5);
@@ -77,39 +50,28 @@ class Http
 
         $ch = curl_init();
         $defaults = [];
-        switch($method) {
-            case 'GET':
-                $geturl = $query_string ? $url . (stripos($url, "?") !== false ? "&" : "?") . $query_string : $url;
-                $defaults[CURLOPT_CUSTOMREQUEST] = $method;
-                $defaults[CURLOPT_URL] = $geturl;
-                break;
-            case 'POST':
+        if ('GET' == $method) {
+            $geturl = $query_string ? $url . (stripos($url, "?") !== false ? "&" : "?") . $query_string : $url;
+            $defaults[CURLOPT_URL] = $geturl;
+        } else {
+            $defaults[CURLOPT_URL] = $url;
+            if ($method == 'POST') {
                 $defaults[CURLOPT_POST] = 1;
-                $defaults[CURLOPT_URL] = $url;
-                $defaults[CURLOPT_POSTFIELDS] = $query_string;//设置请求体，提交数据包
-                break;
-            case 'PUT':
-                $defaults[CURLOPT_URL] = $url;
+            } else {
                 $defaults[CURLOPT_CUSTOMREQUEST] = $method;
-                $defaults[CURLOPT_POSTFIELDS] = $query_string; //设置请求体，提交数据包
-                break;
-            case 'DELETE':
-                $defaults[CURLOPT_URL] = $url;
-                $defaults[CURLOPT_CUSTOMREQUEST] = $method;
-                break;
+            }
+            $defaults[CURLOPT_POSTFIELDS] = $query_string;
         }
+
         $defaults[CURLOPT_HEADER] = false;
         $defaults[CURLOPT_USERAGENT] = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/45.0.2454.98 Safari/537.36";
         $defaults[CURLOPT_FOLLOWLOCATION] = true;
         $defaults[CURLOPT_RETURNTRANSFER] = true;
         $defaults[CURLOPT_CONNECTTIMEOUT] = 3;
         $defaults[CURLOPT_TIMEOUT] = 3;
-        if(empty($header)){
-            // disable 100-continue
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Expect:'));
-        }else{
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
-        }
+
+        // disable 100-continue
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Expect:'));
 
         if ('https' == $protocol) {
             $defaults[CURLOPT_SSL_VERIFYPEER] = false;
