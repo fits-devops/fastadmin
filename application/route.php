@@ -1,25 +1,13 @@
 <?php
+use think\Route;
+// 路由分组
+Route::group('api',function (){
+    Route::group('/:version',function (){
+        Route::resource('model','api/:version.Model');
+        Route::resource('classification','api/:version.Classification');
+        Route::get('model/:bk_obj_id','api/:version.Model/read');
+        Route::resource('attribute','api/:version.Attribute');
 
-// +----------------------------------------------------------------------
-// | ThinkPHP [ WE CAN DO IT JUST THINK ]
-// +----------------------------------------------------------------------
-// | Copyright (c) 2006~2016 http://thinkphp.cn All rights reserved.
-// +----------------------------------------------------------------------
-// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
-// +----------------------------------------------------------------------
-// | Author: liu21st <liu21st@gmail.com>
-// +----------------------------------------------------------------------
+    });
 
-return [
-    //别名配置,别名只能是映射到控制器且访问时必须加上请求的方法
-    '__alias__'   => [
-    ],
-    //变量规则
-    '__pattern__' => [
-    ],
-//        域名绑定到模块
-//        '__domain__'  => [
-//            'admin' => 'admin',
-//            'api'   => 'api',
-//        ],
-];
+});

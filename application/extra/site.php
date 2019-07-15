@@ -4,7 +4,7 @@ return array (
   'name' => 'FitsAdmin',
   'beian' => '',
   'cdnurl' => '',
-  'version' => '1.0.1',
+  'version' => '1.0.1562',
   'timezone' => 'Asia/Shanghai',
   'forbiddenip' => '',
   'languages' => 
