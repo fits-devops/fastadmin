@@ -3,9 +3,6 @@
 namespace app\api\controller\v3;
 
 
-use fast\Http;
-use think\Exception;
-use think\Request;
 
 /**
  * 插件商店
@@ -65,10 +62,10 @@ class Model extends BaseApi
      * @ApiRoute    (/api/v3/Model/{id})
      * 这里返回的是data数组
      */
-    public function update(Request $request,$id)
+    public function update($id)
     {
 
-        $params   = $request->param();
+        $params = $this->request->post("row/a");
         $url = config('fastadmin.cmdb_api_url')."/object/".$id;
         return  self::sendRequest($url, $params, 'PUT');
     }
@@ -78,7 +75,7 @@ class Model extends BaseApi
      * @ApiSummary  (获取插件商店的插件列表信息)
      * @ApiMethod   (GET)
      * @ApiParams   (name="bk_obj_id", type="string", required=true, description="对象模型的ID，只能用英文字母序列命名")
-     * @ApiRoute    (/api/v3/Model/{id})
+     * @ApiRoute    (/api/v3/Model/{bk_obj_id})
      * 这里返回的是data数组
      */
     public function read($bk_obj_id)
@@ -93,24 +90,19 @@ class Model extends BaseApi
     }
 
     /**
-     * @ApiTitle    (获取插件列表)
+     * @ApiTitle    (新增模型)
      * @ApiSummary  (获取插件商店的插件列表信息)
-     * @ApiMethod   (GET)
-     * @ApiParams   (name="bk_obj_id", type="string", required=true, description="对象模型的ID，只能用英文字母序列命名")
+     * @ApiMethod   (POST)
+     * @ApiParams   (name="data", type="object", sample="{'user_id':'int','user_name':'string','profile':{'email':'string','age':'integer'}}", description="扩展数据")
      * @ApiRoute    (/api/v3/Model/{id})
      * 这里返回的是data数组
      */
-    public function save(Request $request)
+    public function save()
     {
 
-        $params   = $request->param();
-
-        $params = @file_get_contents('php://input');  //获取请求体，@的作用为屏蔽警告，可去除。
-     //   $post =  json_decode( $post, true );        //解析成数组
-
+        $params = $this->request->post("row/a");
         $url = config('fastadmin.cmdb_api_url')."/object";
         return  self::sendRequest($url, $params);
     }
-
 
 }

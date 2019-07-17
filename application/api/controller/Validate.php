@@ -3,7 +3,6 @@
 namespace app\api\controller;
 
 use app\common\controller\Api;
-use app\common\model\User;
 
 /**
  * 验证接口

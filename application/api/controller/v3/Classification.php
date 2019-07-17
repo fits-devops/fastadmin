@@ -3,12 +3,9 @@
 namespace app\api\controller\v3;
 
 
-use fast\Http;
-use think\Exception;
-use think\Request;
 
 /**
- * 插件商店
+ * 模型分组
  */
 class Classification extends BaseApi
 {
@@ -49,7 +46,7 @@ class Classification extends BaseApi
      * @ApiTitle    (获取插件列表)
      * @ApiSummary  (获取插件商店的插件列表信息)
      * @ApiMethod   (DELETE)
-     * @ApiParams   (name="id", type="integer", required=true, description="模型ID")
+     * @ApiParams   (name="id", type="integer", required=true, description="模型分组ID")
      * @ApiRoute    (/api/v3/Model/{id})
      * 这里返回的是data数组
      */
@@ -61,8 +58,8 @@ class Classification extends BaseApi
     }
 
     /**
-     * @ApiTitle    (获取插件列表)
-     * @ApiSummary  (获取插件商店的插件列表信息)
+     * @ApiTitle    (模型分组)
+     * @ApiSummary  (更新模型分组)
      * @ApiMethod   (PUT)
      * @ApiRoute    (/api/v3/Model/{id})
      * 这里返回的是data数组
@@ -77,7 +74,7 @@ class Classification extends BaseApi
 
     /**
      * @ApiTitle    (获取插件列表)
-     * @ApiSummary  (获取插件商店的插件列表信息)
+     * @ApiSummary  (获取模型分组信息)
      * @ApiMethod   (GET)
      * @ApiParams   (name="bk_obj_id", type="string", required=true, description="对象模型的ID，只能用英文字母序列命名")
      * @ApiRoute    (/api/v3/Model/{id})
@@ -96,7 +93,7 @@ class Classification extends BaseApi
     /**
      * @ApiTitle    (获取插件列表)
      * @ApiSummary  (获取插件商店的插件列表信息)
-     * @ApiMethod   (GET)
+     * @ApiMethod   (POST)
      * @ApiParams   (name="bk_obj_id", type="string", required=true, description="对象模型的ID，只能用英文字母序列命名")
      * @ApiRoute    (/api/v3/Model/{id})
      * 这里返回的是data数组

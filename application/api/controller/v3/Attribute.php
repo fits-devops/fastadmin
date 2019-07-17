@@ -8,7 +8,7 @@ use think\Exception;
 use think\Request;
 
 /**
- * 插件商店
+ * 字段
  */
 class Attribute extends BaseApi
 {
@@ -32,21 +32,21 @@ class Attribute extends BaseApi
     }
 
     /**
-     * @ApiTitle    (获取插件列表)
+     * @ApiTitle    (查看属性列表)
      * @ApiSummary  (获取插件商店的插件列表信息)
-     * @ApiMethod   (GET)
+     * @ApiMethod   (POST)
      * @ApiRoute    (/api/V3/Model/index)
      */
     public function index()
     {
-
-        $url = config('fastadmin.cmdb_api_url')."/object/classification/0/objects";
-        return  self::sendRequest($url, $params=[], 'post');
+        $params = $this->request->post("row/a");
+        $url = config('fastadmin.cmdb_api_url')."/object/attr/search";
+        return  self::sendRequest($url, $params);
 
     }
 
     /**
-     * @ApiTitle    (获取插件列表)
+     * @ApiTitle    (删除字段)
      * @ApiSummary  (获取插件商店的插件列表信息)
      * @ApiMethod   (DELETE)
      * @ApiParams   (name="id", type="integer", required=true, description="模型ID")
@@ -61,17 +61,17 @@ class Attribute extends BaseApi
     }
 
     /**
-     * @ApiTitle    (获取插件列表)
+     * @ApiTitle    (更新字段)
      * @ApiSummary  (获取插件商店的插件列表信息)
      * @ApiMethod   (PUT)
      * @ApiRoute    (/api/v3/Model/{id})
      * 这里返回的是data数组
      */
-    public function update(Request $request,$id)
+    public function update($id)
     {
 
-        $params   = $request->param();
-        $url = config('fastadmin.cmdb_api_url')."/object/".$id;
+        $params = $this->request->post("row/a");
+        $url = config('fastadmin.cmdb_api_url')."/object/attr/".$id;
         return  self::sendRequest($url, $params, 'PUT');
     }
 
@@ -83,14 +83,13 @@ class Attribute extends BaseApi
      * @ApiRoute    (/api/v3/Model/{id})
      * 这里返回的是data数组
      */
-    public function read($bk_obj_id)
+    public function read($id)
     {
 
         $params = array(
-            "bk_obj_id"=> $bk_obj_id,
-            "bk_supplier_account"=>"0",
+            "id"=> $id,
         );
-        $url = config('fastadmin.cmdb_api_url')."/objects";
+        $url = config('fastadmin.cmdb_api_url')."/attr/search";
         return  self::sendRequest($url, \GuzzleHttp\json_encode($params));
     }
 
@@ -102,15 +101,10 @@ class Attribute extends BaseApi
      * @ApiRoute    (/api/v3/Model/{id})
      * 这里返回的是data数组
      */
-    public function save(Request $request)
+    public function save()
     {
 
-        $params   = $request->param();
-
-        $params = @file_get_contents('php://input');  //获取请求体，@的作用为屏蔽警告，可去除。
-     //   $post =  json_decode( $post, true );        //解析成数组
-      //  return $params;
-
+        $params = $this->request->post("row/a");
         $url = config('fastadmin.cmdb_api_url').$this->path;
         return  self::sendRequest($url, $params);
     }
