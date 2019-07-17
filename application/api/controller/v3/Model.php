@@ -91,7 +91,7 @@ class Model extends BaseApi
 
     /**
      * @ApiTitle    (新增模型)
-     * @ApiSummary  (获取插件商店的插件列表信息)
+     * @ApiSummary  (新增模型)
      * @ApiMethod   (POST)
      * @ApiParams   (name="data", type="object", sample="{'user_id':'int','user_name':'string','profile':{'email':'string','age':'integer'}}", description="扩展数据")
      * @ApiRoute    (/api/v3/Model/{id})
