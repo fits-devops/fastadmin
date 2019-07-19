@@ -997,8 +997,928 @@ table.table-nowrap thead > tr > th {
 .btn-switcher .text-gray {
   color: #d2d6de !important;
 }
-/*修改按钮下弹出框最小长度*/
-.dropdown-menu {
-  min-width: 67px;
-}
 /*# sourceMappingURL=../css/backend.css.map */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.clearfix:before {
+  content: "";
+  display: table;
+  clear: both;
+}
+.page{
+  padding: 15px;
+}
+.page .cmdb-form-input{
+  float: left;
+  width: 220px;
+  height: 30px;
+  line-height: 28px;
+}
+input.cmdb-form-input {
+  width: 100%;
+  height: 36px;
+  padding: 0 10px;
+  font-size: 14px;
+  border: 1px solid #c3cdd7;
+  border-radius: 2px;
+  outline: none;
+}
+.clearfix {
+  zoom: 1;
+}
+.clearfix {
+  display: inline-block;
+  display: block;
+}
+
+.icon-box{
+  padding: 15px 10px 0 10px;
+  width: 100%;
+  height: calc(100% - 60px);
+}
+li {list-style-type:none;}
+.bk-button .bk-icon {
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  min-width: 16px;
+  display: inline-block;
+  position: relative;
+  top: 1px;
+}
+.bk-icon {
+  font-family: bk-icons-linear!important;
+  speak: none;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.choose-icon-box {
+  position: absolute;
+  left: 0px;
+  top: 95px;
+  width: 395px;
+  height: 262px;
+  background: #fff;
+  border: 1px solid #dde4e8;
+  box-shadow: 0 3px 6px 0 rgba(51,60,72,.13);
+  z-index: 99;
+}
+.model-icon-list {
+  display: block;
+  height: 100%;
+}
+.page {
+  padding: 15px;
+}
+.page .cmdb-form-input {
+  float: left;
+  width: 220px;
+  height: 30px;
+  line-height: 28px;
+}
+.page .page-btn {
+  float: right;
+}
+.page .page-btn .bk-button {
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  line-height: 1;
+  vertical-align: middle;
+}
+
+.icon-box .icon {
+  float: left;
+  width: calc(100% / 7);
+  height: 46px;
+  padding: 5px;
+  font-size: 24px;
+  text-align: center;
+  cursor: pointer;
+}
+.icon-box .icon.create {
+  font-size: 30px;
+  margin-bottom: 10px;
+  height: 50px;
+}
+.icon-box .icon:hover,
+.icon-box .icon.active {
+  background: #e2efff;
+  color: #3c96ff;
+}
+.icon-box .page {
+  height: 52px;
+  padding: 10px 20px;
+}
+.icon-box .page .cmdb-form-input {
+  float: left;
+  width: 200px;
+  height: 30px;
+}
+.icon-box .page .page-btn {
+  float: right;
+}
+.icon-box .page .page-btn .bk-button {
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  line-height: 1;
+  vertical-align: top;
+}
+@font-face {
+  font-family: 'icomoon';
+  src:  url(../cc-icon/fonts/icomoon.8ef7056.eot);
+  src:  url(../cc-icon/fonts/icomoon.8ef7056.eot#iefix) format('embedded-opentype'),
+  url(../cc-icon/fonts/icomoon.a8073b0.ttf) format('truetype'),
+  url(../cc-icon/fonts/icomoon.3aba3cf.woff) format('woff'),
+  url(../cc-icon/fonts/icomoon.svg#icomoon) format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+[class*=icon-] {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.icon-cc-activeMQ:before {
+  content: "\E900";
+}
+
+.icon-cc-android:before {
+  content: "\E901";
+}
+
+.icon-cc-angle-left:before {
+  content: "\E902";
+}
+
+.icon-cc-angle-right:before {
+  content: "\E903";
+}
+
+.icon-cc-apache:before {
+  content: "\E904";
+}
+
+.icon-cc-apple:before {
+  content: "\E905";
+}
+
+.icon-cc-architecture:before {
+  content: "\E906";
+}
+
+.icon-cc-attribute:before {
+  content: "\E907";
+}
+
+.icon-cc-backstage:before {
+  content: "\E908";
+}
+
+.icon-cc-backward:before {
+  content: "\E909";
+}
+
+.icon-cc-balance:before {
+  content: "\E90A";
+}
+
+.icon-cc-basic-resource:before {
+  content: "\E90B";
+}
+
+.icon-cc-branch-company:before {
+  content: "\E90C";
+}
+
+.icon-cc-branch-shop:before {
+  content: "\E90D";
+}
+
+.icon-cc-broom:before {
+  content: "\E90E";
+}
+
+.icon-cc-business:before {
+  content: "\E90F";
+}
+
+.icon-cc-cabinet:before {
+  content: "\E910";
+}
+
+.icon-cc-camera:before {
+  content: "\E911";
+}
+
+.icon-cc-cbd:before {
+  content: "\E912";
+}
+
+.icon-cc-certificate:before {
+  content: "\E913";
+}
+
+.icon-cc-classroom:before {
+  content: "\E914";
+}
+
+.icon-cc-clear:before {
+  content: "\E915";
+}
+
+.icon-cc-cloud-host:before {
+  content: "\E916";
+}
+
+.icon-cc-cloud-to-uploa:before {
+  content: "\E917";
+}
+
+.icon-cc-collect:before {
+  content: "\E918";
+}
+
+.icon-cc-collection:before {
+  content: "\E919";
+}
+
+.icon-cc-columnar:before {
+  content: "\E91A";
+}
+
+.icon-cc-compact:before {
+  content: "\E91B";
+}
+
+.icon-cc-company:before {
+  content: "\E91C";
+}
+
+.icon-cc-copy:before {
+  content: "\E91D";
+}
+
+.icon-cc-cpu:before {
+  content: "\E91E";
+}
+
+.icon-cc-create-business:before {
+  content: "\E91F";
+}
+
+.icon-cc-cube:before {
+  content: "\E920";
+}
+
+.icon-cc-cube-entity:before {
+  content: "\E921";
+}
+
+.icon-cc-curve:before {
+  content: "\E922";
+}
+
+.icon-cc-database:before {
+  content: "\E923";
+}
+
+.icon-cc-db2:before {
+  content: "\E924";
+}
+
+.icon-cc-default:before {
+  content: "\E925";
+}
+
+.icon-cc-default-class:before {
+  content: "\E926";
+}
+
+.icon-cc-del:before {
+  content: "\E927";
+}
+
+.icon-cc-department:before {
+  content: "\E928";
+}
+
+.icon-cc-derivation:before {
+  content: "\E929";
+}
+
+.icon-cc-directory:before {
+  content: "\E92A";
+}
+
+.icon-cc-disk:before {
+  content: "\E92B";
+}
+
+.icon-cc-domain:before {
+  content: "\E92C";
+}
+
+.icon-cc-edit:before {
+  content: "\E92D";
+}
+
+.icon-cc-elastic-search:before {
+  content: "\E92E";
+}
+
+.icon-cc-engine-room:before {
+  content: "\E92F";
+}
+
+.icon-cc-equipment:before {
+  content: "\E930";
+}
+
+.icon-cc-factory:before {
+  content: "\E931";
+}
+
+.icon-cc-failure:before {
+  content: "\E932";
+}
+
+.icon-cc-firewall:before {
+  content: "\E933";
+}
+
+.icon-cc-forward:before {
+  content: "\E934";
+}
+
+.icon-cc-free-pool:before {
+  content: "\E935";
+}
+
+.icon-cc-fullscreen:before {
+  content: "\E936";
+}
+
+.icon-cc-funnel:before {
+  content: "\E937";
+}
+
+.icon-cc-goback:before {
+  content: "\E938";
+}
+
+.icon-cc-group:before {
+  content: "\E939";
+}
+
+.icon-cc-hardware:before {
+  content: "\E93A";
+}
+
+.icon-cc-headoffice:before {
+  content: "\E93B";
+}
+
+.icon-cc-hide:before {
+  content: "\E93C";
+}
+
+.icon-cc-history:before {
+  content: "\E93D";
+}
+
+.icon-cc-history2:before {
+  content: "\E93E";
+}
+
+.icon-cc-home:before {
+  content: "\E93F";
+}
+
+.icon-cc-host:before {
+  content: "\E940";
+}
+
+.icon-cc-host-breakdown:before {
+  content: "\E941";
+}
+
+.icon-cc-host-free-pool:before {
+  content: "\E942";
+}
+
+.icon-cc-icon-city:before {
+  content: "\E943";
+}
+
+.icon-cc-idc:before {
+  content: "\E944";
+}
+
+.icon-cc-iis:before {
+  content: "\E945";
+}
+
+.icon-cc-import:before {
+  content: "\E946";
+}
+
+.icon-cc-influxdb:before {
+  content: "\E947";
+}
+
+.icon-cc-information:before {
+  content: "\E948";
+}
+
+.icon-cc-International:before {
+  content: "\E949";
+}
+
+.icon-cc-ip:before {
+  content: "\E94A";
+}
+
+.icon-cc-kafka:before {
+  content: "\E94B";
+}
+
+.icon-cc-key:before {
+  content: "\E94C";
+}
+
+.icon-cc-lang:before {
+  content: "\E94D";
+}
+
+.icon-cc-line:before {
+  content: "\E94E";
+}
+
+.icon-cc-link:before {
+  content: "\E94F";
+}
+
+.icon-cc-linux:before {
+  content: "\E950";
+}
+
+.icon-cc-list:before {
+  content: "\E951";
+}
+
+.icon-cc-lock:before {
+  content: "\E952";
+}
+
+.icon-cc-log:before {
+  content: "\E953";
+}
+
+.icon-cc-logout:before {
+  content: "\E954";
+}
+
+.icon-cc-machine:before {
+  content: "\E955";
+}
+
+.icon-cc-mail-server:before {
+  content: "\E956";
+}
+
+.icon-cc-mainboard:before {
+  content: "\E957";
+}
+
+.icon-cc-map:before {
+  content: "\E958";
+}
+
+.icon-cc-market:before {
+  content: "\E959";
+}
+
+.icon-cc-memory:before {
+  content: "\E95A";
+}
+
+.icon-cc-middleware:before {
+  content: "\E95B";
+}
+
+.icon-cc-minicomputer:before {
+  content: "\E95C";
+}
+
+.icon-cc-model:before {
+  content: "\E95D";
+}
+
+.icon-cc-module:before {
+  content: "\E95E";
+}
+
+.icon-cc-mongodb:before {
+  content: "\E95F";
+}
+
+.icon-cc-mysql:before {
+  content: "\E960";
+}
+
+.icon-cc-nav-audit:before {
+  content: "\E961";
+}
+
+.icon-cc-nav-authority:before {
+  content: "\E962";
+}
+
+.icon-cc-nav-collection:before {
+  content: "\E963";
+}
+
+.icon-cc-nav-detective:before {
+  content: "\E964";
+}
+
+.icon-cc-nav-model:before {
+  content: "\E965";
+}
+
+.icon-cc-nav-resource:before {
+  content: "\E966";
+}
+
+.icon-cc-nav-stick:before {
+  content: "\E967";
+}
+
+.icon-cc-nav-toggle:before {
+  content: "\E968";
+}
+
+.icon-cc-net-port:before {
+  content: "\E969";
+}
+
+.icon-cc-network-card:before {
+  content: "\E96A";
+}
+
+.icon-cc-network-equipment:before {
+  content: "\E96B";
+}
+
+.icon-cc-network-manage:before {
+  content: "\E96C";
+}
+
+.icon-cc-networks:before {
+  content: "\E96D";
+}
+
+.icon-cc-network-segment:before {
+  content: "\E96E";
+}
+
+.icon-cc-nginx:before {
+  content: "\E96F";
+}
+
+.icon-cc-node:before {
+  content: "\E970";
+}
+
+.icon-cc-not-allowed:before {
+  content: "\E971";
+}
+
+.icon-cc-operator:before {
+  content: "\E972";
+}
+
+.icon-cc-oracle:before {
+  content: "\E973";
+}
+
+.icon-cc-organization:before {
+  content: "\E974";
+}
+
+.icon-cc-other:before {
+  content: "\E975";
+}
+
+.icon-cc-pie-chart:before {
+  content: "\E976";
+}
+
+.icon-cc-pin:before {
+  content: "\E977";
+}
+
+.icon-cc-plus:before {
+  content: "\E978";
+}
+
+.icon-cc-plus-circle:before {
+  content: "\E979";
+}
+
+.icon-cc-port:before {
+  content: "\E97A";
+}
+
+.icon-cc-postgresql:before {
+  content: "\E97B";
+}
+
+.icon-cc-printer:before {
+  content: "\E97C";
+}
+
+.icon-cc-process:before {
+  content: "\E97D";
+}
+
+.icon-cc-program:before {
+  content: "\E97E";
+}
+
+.icon-cc-progress:before {
+  content: "\E97F";
+}
+
+.icon-cc-project:before {
+  content: "\E980";
+}
+
+.icon-cc-push-configuration:before {
+  content: "\E981";
+}
+
+.icon-cc-push-history:before {
+  content: "\E982";
+}
+
+.icon-cc-question:before {
+  content: "\E983";
+}
+
+.icon-cc-record:before {
+  content: "\E984";
+}
+
+.icon-cc-rect-add:before {
+  content: "\E985";
+}
+
+.icon-cc-rect-sub:before {
+  content: "\E986";
+}
+
+.icon-cc-redis:before {
+  content: "\E987";
+}
+
+.icon-cc-repeater:before {
+  content: "\E988";
+}
+
+.icon-cc-report:before {
+  content: "\E989";
+}
+
+.icon-cc-required:before {
+  content: "\E98A";
+}
+
+.icon-cc-resize-full:before {
+  content: "\E98B";
+}
+
+.icon-cc-resize-small:before {
+  content: "\E98C";
+}
+
+.icon-cc-resources:before {
+  content: "\E98D";
+}
+
+.icon-cc-round-plus:before {
+  content: "\E98E";
+}
+
+.icon-cc-router:before {
+  content: "\E98F";
+}
+
+.icon-cc-security:before {
+  content: "\E990";
+}
+
+.icon-cc-security2:before {
+  content: "\E991";
+}
+
+.icon-cc-senior:before {
+  content: "\E992";
+}
+
+.icon-cc-server:before {
+  content: "\E993";
+}
+
+.icon-cc-service:before {
+  content: "\E994";
+}
+
+.icon-cc-set:before {
+  content: "\E995";
+}
+
+.icon-cc-setting:before {
+  content: "\E996";
+}
+
+.icon-cc-shift:before {
+  content: "\E997";
+}
+
+.icon-cc-show:before {
+  content: "\E998";
+}
+
+.icon-cc-skin:before {
+  content: "\E999";
+}
+
+.icon-cc-skip:before {
+  content: "\E99A";
+}
+
+.icon-cc-sort:before {
+  content: "\E99B";
+}
+
+.icon-cc-sqlite:before {
+  content: "\E99C";
+}
+
+.icon-cc-sql-server:before {
+  content: "\E99D";
+}
+
+.icon-cc-square:before {
+  content: "\E99E";
+}
+
+.icon-cc-star:before {
+  content: "\E99F";
+}
+
+.icon-cc-statement:before {
+  content: "\E9A0";
+}
+
+.icon-cc-stick:before {
+  content: "\E9A1";
+}
+
+.icon-cc-storage:before {
+  content: "\E9A2";
+}
+
+.icon-cc-subnet:before {
+  content: "\E9A3";
+}
+
+.icon-cc-switch2:before {
+  content: "\E9A4";
+}
+
+.icon-cc-thumbtack:before {
+  content: "\E9A5";
+}
+
+.icon-cc-tomcat:before {
+  content: "\E9A6";
+}
+
+.icon-cc-tree:before {
+  content: "\E9A7";
+}
+
+.icon-cc-triangle:before {
+  content: "\E9A8";
+}
+
+.icon-cc-triangle-sider:before {
+  content: "\E9A9";
+}
+
+.icon-cc-unix:before {
+  content: "\E9AA";
+}
+
+.icon-cc-ups:before {
+  content: "\E9AB";
+}
+
+.icon-cc-user:before {
+  content: "\E9AC";
+}
+
+.icon-cc-virtual:before {
+  content: "\E9AD";
+}
+
+.icon-cc-vmware:before {
+  content: "\E9AE";
+}
+
+.icon-cc-vsphere:before {
+  content: "\E9AF";
+}
+
+.icon-cc-weblogic:before {
+  content: "\E9B0";
+}
+
+.icon-cc-win:before {
+  content: "\E9B1";
+}
+
+.icon-cc-win7:before {
+  content: "\E9B2";
+}
+
+.icon-cc-wireless:before {
+  content: "\E9B3";
+}
+
+@font-face {
+  font-family: 'bk-icons-linear';
+  src:  url(../bk-icon/fonts/bk_icons_linear.271e3c8.eot);
+  src:  url(../bk-icon/fonts/bk_icons_linear.271e3c8.eot#iefix) format('embedded-opentype'),
+  url(../bk-icon/fonts/bk_icons_linear.c3bb443.ttf) format('truetype'),
+  url(../bk-icon/fonts/bk_icons_linear.6e486b9.woff) format('woff'),
+  url(../bk-icon/bk_icons_linear.1d0217a.svg#bk_icons_linear) format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*兼容fa处理*/
+
+.fa{
+  font-family: FontAwesome !important;
+}
+
+.bk-icon {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'bk-icons-linear' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.icon-angle-left:before {
+  content: "\E957";
+}
+.icon-angle-right:before {
+  content: "\E958";
+}
