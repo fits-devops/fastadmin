@@ -41,6 +41,12 @@ define('cmdbIcon',['jquery'], function ($) {
             var newData = cmdbIcon.config.dataJson.slice(cmdbIcon.config.page.size * cmdbIcon.config.page.current, cmdbIcon.config.page.size * (cmdbIcon.config.page.current + 1));
             this.makeHtml(newData);
         },
+        show:function () {
+            cmdbIcon.config.jsontip.show();
+        },
+        hide:function () {
+            cmdbIcon.config.jsontip.hide();
+        },
         init: function () {
             $(function () {
                 $.getJSON("../assets/js/model-icon.json", function (data) {
