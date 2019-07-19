@@ -38,7 +38,7 @@ class Classification extends BaseApi
     {
 
         $url = config('fastadmin.cmdb_api_url')."/object/classifications";
-        return  self::sendRequest($url, $params=[], 'post');
+        return  self::sendRequest($url);
 
     }
 
@@ -47,7 +47,7 @@ class Classification extends BaseApi
      * @ApiSummary  (获取插件商店的插件列表信息)
      * @ApiMethod   (DELETE)
      * @ApiParams   (name="id", type="integer", required=true, description="模型分组ID")
-     * @ApiRoute    (/api/v3/Model/{id})
+     * @ApiRoute    (/api/v3/classification/{id})
      * 这里返回的是data数组
      */
     public function delete($id)
@@ -58,8 +58,9 @@ class Classification extends BaseApi
     }
 
     /**
-     * @ApiTitle    (模型分组)
+     * @ApiTitle    (更新模型分组)
      * @ApiSummary  (更新模型分组)
+     * @ApiSector   (模型分组)
      * @ApiMethod   (PUT)
      * @ApiRoute    (/api/v3/Model/{id})
      * 这里返回的是data数组
@@ -73,8 +74,9 @@ class Classification extends BaseApi
     }
 
     /**
-     * @ApiTitle    (获取插件列表)
+     * @ApiTitle    (读取模型分组)
      * @ApiSummary  (获取模型分组信息)
+     * @ApiSector   (模型分组)
      * @ApiMethod   (GET)
      * @ApiParams   (name="bk_obj_id", type="string", required=true, description="对象模型的ID，只能用英文字母序列命名")
      * @ApiRoute    (/api/v3/Model/{id})
@@ -91,8 +93,9 @@ class Classification extends BaseApi
     }
 
     /**
-     * @ApiTitle    (获取插件列表)
+     * @ApiTitle    (模型分组新增)
      * @ApiSummary  (获取插件商店的插件列表信息)
+     * @ApiSector   (模型分组)
      * @ApiMethod   (POST)
      * @ApiParams   (name="bk_obj_id", type="string", required=true, description="对象模型的ID，只能用英文字母序列命名")
      * @ApiRoute    (/api/v3/Model/{id})

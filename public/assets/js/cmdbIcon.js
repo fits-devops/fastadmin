@@ -6,6 +6,7 @@ define('cmdbIcon',['jquery'], function ($) {
     var cmdbIcon = {
         config:{
             jsontip:$(".icon-box"),
+            chooseIconBox:$(".choose-icon-box"),
             dataJson:{},
             page:{},
             searchText:''
@@ -42,10 +43,10 @@ define('cmdbIcon',['jquery'], function ($) {
             this.makeHtml(newData);
         },
         show:function () {
-            cmdbIcon.config.jsontip.show();
+            cmdbIcon.config.chooseIconBox.show();
         },
         hide:function () {
-            cmdbIcon.config.jsontip.hide();
+            cmdbIcon.config.chooseIconBox.hide();
         },
         init: function () {
             $(function () {
@@ -69,8 +70,6 @@ define('cmdbIcon',['jquery'], function ($) {
                 $("#button-next").on('click',function () {
                     cmdbIcon.pageTurning(++cmdbIcon.config.page.current);
                 });
-
-
             });
         }
 
