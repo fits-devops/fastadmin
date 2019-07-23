@@ -5,7 +5,7 @@ define('cmdbIcon',['jquery'], function ($) {
 
     var cmdbIcon = {
         config:{
-            jsontip:$(".icon-box"),
+            jsontip:$("#icon-box"),
             chooseIconBox:$(".choose-icon-box"),
             dataJson:{},
             page:{},
@@ -25,7 +25,7 @@ define('cmdbIcon',['jquery'], function ($) {
             $jsontip.html('');//清空内容
             var strHtml='';
             $.each(data, function (index, info) {
-                strHtml += "<li  data-toggle='popover' title="+info["nameZh"]+" class='icon' onclick=chooseIcon("+'"'+ info["value"]+'"'+") ><i class=" + info["value"] +"></i></li>";
+                strHtml += "<li  data-toggle='popover' title="+info["nameZh"]+" class='icon' data-icon=" + info["value"] +"><i class=" + info["value"] +"></i></li>";
             });
             $jsontip.html(strHtml);//显示处理后的数据
         },

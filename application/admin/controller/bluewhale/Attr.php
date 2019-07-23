@@ -76,7 +76,7 @@ class Attr extends Backend
 
             return json($result);
         }
-        return $this->view->fetch();
+        return $this->view->fetch('index');
     }
 
     public function table2($obj)

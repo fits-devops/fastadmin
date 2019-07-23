@@ -277,5 +277,6 @@ return [
         'api_url'             => 'https://api.fastadmin.net',
         //插件商店接口
         'api_addonstore'     => 'http://www.demofitsadmin.com',
+        'cmdb_api_url'       => 'http://192.168.31.215:8083/api/v3'
     ],
 ];

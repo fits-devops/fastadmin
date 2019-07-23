@@ -32,7 +32,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form','cmdbIcon'], function 
             $("body").on('click','#icon-box li',function (e) {
                 e.preventDefault();
                 var icon = $(this).attr('data-icon');
-                var id = 18;
+                var id = 12;
                 // row 不使用
                 Fast.api.ajax({
                     url:"/admin/bluewhale/model/changIcon/ids/"+id,
