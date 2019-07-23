@@ -32,11 +32,13 @@ class Model extends BaseApi
      * @ApiMethod   (GET)
      * @ApiRoute    (/api/V3/Model/index)
      */
-    public function index()
+    public function index($params = [])
     {
 
         $url = config('fastadmin.cmdb_api_url')."/object/classification/0/objects";
-        return  self::sendRequest($url, $params=[], 'post');
+        $datas_json = self::sendRequest($url, $params, 'post');
+        $result = json_decode($datas_json,true);
+        return  $result;
 
     }
 
@@ -51,8 +53,10 @@ class Model extends BaseApi
     public function delete($id)
     {
 
-        $url = config('fastadmin.cmdb_api_url')."/object/".$id;
-        return  self::sendRequest($url, $params=[], 'DELETE');
+        $url = config('fastadmin.cmdb_api_url')."/object/classification/".$id;
+        $datas_json = self::sendRequest($url, $params=[], 'DELETE');
+        $result = json_decode($datas_json,true);
+        return  $result;
     }
 
     /**
@@ -62,12 +66,14 @@ class Model extends BaseApi
      * @ApiRoute    (/api/v3/Model/{id})
      * 这里返回的是data数组
      */
-    public function update($id)
+    public function update($id,$params)
     {
 
-        $params = $this->request->post("row/a");
-        $url = config('fastadmin.cmdb_api_url')."/object/".$id;
-        return  self::sendRequest($url, $params, 'PUT');
+        $params_json = \GuzzleHttp\json_encode($params,JSON_UNESCAPED_UNICODE);
+        $url = config('fastadmin.cmdb_api_url')."/object/classification/".$id;
+        $datas_json = self::sendRequest($url, $params_json, 'PUT');
+        $result = json_decode($datas_json,true);
+        return  $result;
     }
 
     /**
@@ -97,12 +103,14 @@ class Model extends BaseApi
      * @ApiRoute    (/api/v3/Model/{id})
      * 这里返回的是data数组
      */
-    public function save()
+    public function save($params)
     {
 
-        $params = $this->request->post("row/a");
-        $url = config('fastadmin.cmdb_api_url')."/object";
-        return  self::sendRequest($url, $params);
+        $params_json = \GuzzleHttp\json_encode($params,JSON_UNESCAPED_UNICODE);
+        $url = config('fastadmin.cmdb_api_url')."/object/classification";
+        $datas_json = self::sendRequest($url, $params_json);
+        $result = json_decode($datas_json,true);
+        return  $result;
     }
 
 }
