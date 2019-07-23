@@ -10,7 +10,7 @@ use think\Request;
 /**
  * 插件商店
  */
-class Attribute extends BaseApi
+class Association extends BaseApi
 {
 
     //如果$noNeedLogin为空表示所有接口都需要登录才能请求
@@ -39,12 +39,12 @@ class Attribute extends BaseApi
      * @ApiMethod   (GET)
      * @ApiRoute    (/api/V3/Model/index)
      */
-    public function index()
+    public function index($obj)
     {
         $params = array(
-            "bk_obj_id"=>"cc_test_inst"
+            "condition" => array( "bk_obj_id"=>$obj)
         );
-        $url = config('fastadmin.cmdb_api_url')."/object/attr/search";
+        $url = config('fastadmin.cmdb_api_url')."/object/association/action/search";
         return  self::sendRequest($url, \GuzzleHttp\json_encode($params));
 
     }
@@ -60,7 +60,7 @@ class Attribute extends BaseApi
     public function delete($id)
     {
 
-        $url = config('fastadmin.cmdb_api_url').$this->path.'/'.$id;
+        $url = config('fastadmin.cmdb_api_url').'/object/association/'.$id.'/action/delete';
         return  self::sendRequest($url, $params=[], 'DELETE');
     }
 
@@ -75,8 +75,14 @@ class Attribute extends BaseApi
     {
 
         $params = $this->request->post("row/a");
-        $url = config('fastadmin.cmdb_api_url')."/object/attr/".$id;
-        return  self::sendRequest($url, \GuzzleHttp\json_encode($params), 'PUT');
+
+        // 只允许的字段更新
+        $filed = array(
+            'bk_asst_id' =>$params['bk_asst_id'],
+            'bk_obj_asst_name' =>$params['bk_obj_asst_name']
+        );
+        $url = config('fastadmin.cmdb_api_url')."/object/association/".$id."/action/update";
+        return  self::sendRequest($url, \GuzzleHttp\json_encode($filed), 'PUT');
     }
 
     /**
@@ -87,15 +93,16 @@ class Attribute extends BaseApi
      * @ApiRoute    (/api/v3/Model/{id})
      * 这里返回的是data数组
      */
-    public function read($id)
+    public function read($id,$obj)
     {
 
         $params = array(
-            "bk_obj_id"=>$this->bk_obj_id,
-            "id"=> $id,
-            "bk_supplier_account"=>"0",
+            "condition" =>array(
+                "bk_obj_id"=>$obj,
+                "id"=> $id
+               )
         );
-        $url = config('fastadmin.cmdb_api_url')."/object/attr/search";
+        $url = config('fastadmin.cmdb_api_url')."/object/association/action/search";
         return  self::sendRequest($url, \GuzzleHttp\json_encode($params));
     }
 
@@ -111,9 +118,8 @@ class Attribute extends BaseApi
     {
 
         $params = $this->request->post("row/a");
-        $params['bk_obj_id'] = $this->bk_obj_id;
-        $params['bk_property_group'] = 'default';
-        $url = config('fastadmin.cmdb_api_url').$this->path;
+        $params['bk_obj_asst_id'] = $params['bk_obj_id'].'_'.$params['bk_asst_id'].'_'.$params['bk_asst_obj_id'];
+        $url = config('fastadmin.cmdb_api_url').'/object/association/action/create';
         return  self::sendRequest($url,\GuzzleHttp\json_encode($params));
     }
 

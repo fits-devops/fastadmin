@@ -1,0 +1,69 @@
+<div class="panel panel-default panel-intro">
+    {include file="common/cmdbIcon" /}
+    <div data-v-e8a38962="" class="model-info" style="position: relative;">
+        <div data-v-e8a38962="" class="choose-icon-wrapper">
+            <div data-v-e8a38962="" class="icon-box">
+                <i data-v-e8a38962="" class="icon icon-cc-default ispre" style=" padding-left: 12px;"></i>
+                <p data-v-e8a38962="" class="hover-text">点击切换</p>
+            </div> <!---->
+        </div>
+        <div data-v-e8a38962="" class="model-text">
+            <span data-v-e8a38962="">唯一标识：</span>
+            <span data-v-e8a38962="" class="text-content id" id="obj-id">cc_test_inst</span>
+        </div>
+        <div data-v-e8a38962="" class="model-text">
+            <span data-v-e8a38962="">名称：</span>
+            <span data-v-e8a38962="" class="text-content">cc_test_inst2</span> <!---->
+        </div>
+    </div>
+    <div class="panel-heading">
+        {:build_heading(null,FALSE)}
+        <ul class="nav nav-tabs" data-field="status">
+            {foreach name="statusList" item="vo"}
+            <li class="{:$key=='first'?'active':''}"><a href="#{$key}" data-value="{$key}" data-toggle="tab">{$vo}</a></li>
+            {/foreach}
+        </ul>
+    </div>
+
+
+    <div class="panel-body">
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="first">
+                <div class="widget-body no-padding">
+                    <div id="toolbar1" class="toolbar">
+                        <a href="javascript:;" class="btn btn-primary btn-refresh" title="{:__('Refresh')}" ><i class="fa fa-refresh"></i> </a>
+                        <a href="javascript:;" class="btn btn-success btn-add {:$auth->check('bluewhale/atrr/add')?'':'hide'}" title="{:__('Add')}" ><i class="fa fa-plus"></i> {:__('Add')}</a>
+
+                    </div>
+                    <table id="table1" class="table table-striped table-bordered table-hover table-nowrap"
+                           data-operate-edit="{:$auth->check('bluewhale/atrr/edit')}"
+                           data-operate-del="{:$auth->check('bluewhale/atrr/del')}"
+                           width="100%">
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="second">
+                <div id="toolbar2" class="toolbar">
+                    {:build_toolbar('refresh')}
+                    <a href="javascript:;" class="btn btn-success btn-add {:$auth->check('bluewhale/association/add')?'':'hide'}" title="{:__('Add')}" ><i class="fa fa-plus"></i>新建关联</a>
+                </div>
+                <table id="table2" class="table table-striped table-bordered table-hover" width="100%">
+                </table>
+            </div>
+            <div class="tab-pane fade" id="three">
+                <div id="toolbar3" class="toolbar">
+                    {:build_toolbar('refresh')}
+                </div>
+                <table id="table3" class="table table-striped table-bordered table-hover" width="100%">
+                </table>
+            </div>
+            <div class="tab-pane fade" id="four">
+                <div id="toolbar4" class="toolbar">
+                    {:build_toolbar('refresh')}
+                </div>
+                <table id="toolbar4" class="table table-striped table-bordered table-hover" width="100%">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

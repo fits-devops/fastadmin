@@ -1064,8 +1064,8 @@ li {list-style-type:none;}
 }
 .choose-icon-box {
   position: absolute;
-  left: 0px;
-  top: 95px;
+  left: 50px;
+  top: 135px;
   width: 395px;
   height: 262px;
   background: #fff;
