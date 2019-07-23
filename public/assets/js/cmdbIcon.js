@@ -5,7 +5,8 @@ define('cmdbIcon',['jquery'], function ($) {
 
     var cmdbIcon = {
         config:{
-            jsontip:$(".icon-box"),
+            jsontip:$("#icon-box"),
+            chooseIconBox:$(".choose-icon-box"),
             dataJson:{},
             page:{},
             searchText:''
@@ -24,7 +25,7 @@ define('cmdbIcon',['jquery'], function ($) {
             $jsontip.html('');//清空内容
             var strHtml='';
             $.each(data, function (index, info) {
-                strHtml += "<li  data-toggle='popover' title="+info["nameZh"]+" class='icon' onclick=chooseIcon("+'"'+ info["value"]+'"'+") ><i class=" + info["value"] +"></i></li>";
+                strHtml += "<li  data-toggle='popover' title="+info["nameZh"]+" class='icon' data-icon=" + info["value"] +"><i class=" + info["value"] +"></i></li>";
             });
             $jsontip.html(strHtml);//显示处理后的数据
         },
@@ -40,6 +41,12 @@ define('cmdbIcon',['jquery'], function ($) {
             }
             var newData = cmdbIcon.config.dataJson.slice(cmdbIcon.config.page.size * cmdbIcon.config.page.current, cmdbIcon.config.page.size * (cmdbIcon.config.page.current + 1));
             this.makeHtml(newData);
+        },
+        show:function () {
+            cmdbIcon.config.chooseIconBox.show();
+        },
+        hide:function () {
+            cmdbIcon.config.chooseIconBox.hide();
         },
         init: function () {
             $(function () {
@@ -63,8 +70,6 @@ define('cmdbIcon',['jquery'], function ($) {
                 $("#button-next").on('click',function () {
                     cmdbIcon.pageTurning(++cmdbIcon.config.page.current);
                 });
-
-
             });
         }
 

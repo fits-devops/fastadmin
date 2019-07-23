@@ -8,9 +8,9 @@ use think\Exception;
 use think\Request;
 
 /**
- * 插件商店
+ * 字段分组
  */
-class AssociationType extends BaseApi
+class AttributeGroup extends BaseApi
 {
 
     //如果$noNeedLogin为空表示所有接口都需要登录才能请求
@@ -24,7 +24,7 @@ class AssociationType extends BaseApi
 
     protected $model = null;
 
-    private $path = '/object/classification';
+    private $path = '/objectatt/group/';
 
     public function _initialize()
     {
@@ -32,22 +32,21 @@ class AssociationType extends BaseApi
     }
 
     /**
-     * @ApiTitle    (获取插件列表)
-     * @ApiSummary  (获取插件商店的插件列表信息)
+     * @ApiTitle    (查看某个字段的分组)
+     * @ApiSummary  (查看某个字段的分组)
      * @ApiMethod   (GET)
      * @ApiRoute    (/api/V3/Model/index)
      */
-    public function index()
+    public function index($name)
     {
-
-        $url = config('fastadmin.cmdb_api_url')."/object/classification/0/objects";
-        return  self::sendRequest($url, $params=[], 'post');
+        $url = config('fastadmin.cmdb_api_url').$this->path."/property/owner/0/object/".$name;
+        return  self::sendRequest($url);
 
     }
 
     /**
-     * @ApiTitle    (获取插件列表)
-     * @ApiSummary  (获取插件商店的插件列表信息)
+     * @ApiTitle    (删除字段分组)
+     * @ApiSummary  (删除字段分组)
      * @ApiMethod   (DELETE)
      * @ApiParams   (name="id", type="integer", required=true, description="模型ID")
      * @ApiRoute    (/api/v3/Model/{id})
@@ -56,22 +55,22 @@ class AssociationType extends BaseApi
     public function delete($id)
     {
 
-        $url = config('fastadmin.cmdb_api_url')."/object/".$id;
+        $url = config('fastadmin.cmdb_api_url').$this->path.'/groupid/'.$id;
         return  self::sendRequest($url, $params=[], 'DELETE');
     }
 
     /**
-     * @ApiTitle    (获取插件列表)
+     * @ApiTitle    (更新字段)
      * @ApiSummary  (获取插件商店的插件列表信息)
      * @ApiMethod   (PUT)
      * @ApiRoute    (/api/v3/Model/{id})
      * 这里返回的是data数组
      */
-    public function update(Request $request,$id)
+    public function update($id)
     {
 
-        $params   = $request->param();
-        $url = config('fastadmin.cmdb_api_url')."/object/".$id;
+        $params = $this->request->post("row/a");
+        $url = config('fastadmin.cmdb_api_url')."/object/attr/".$id;
         return  self::sendRequest($url, $params, 'PUT');
     }
 
@@ -83,14 +82,13 @@ class AssociationType extends BaseApi
      * @ApiRoute    (/api/v3/Model/{id})
      * 这里返回的是data数组
      */
-    public function read($bk_obj_id)
+    public function read($id)
     {
 
         $params = array(
-            "bk_obj_id"=> $bk_obj_id,
-            "bk_supplier_account"=>"0",
+            "id"=> $id,
         );
-        $url = config('fastadmin.cmdb_api_url')."/objects";
+        $url = config('fastadmin.cmdb_api_url')."/attr/search";
         return  self::sendRequest($url, \GuzzleHttp\json_encode($params));
     }
 
@@ -102,18 +100,28 @@ class AssociationType extends BaseApi
      * @ApiRoute    (/api/v3/Model/{id})
      * 这里返回的是data数组
      */
-    public function save(Request $request)
+    public function save()
     {
 
-        $params   = $request->param();
-
-        $params = @file_get_contents('php://input');  //获取请求体，@的作用为屏蔽警告，可去除。
-     //   $post =  json_decode( $post, true );        //解析成数组
-      //  return $params;
-
-        $url = config('fastadmin.cmdb_api_url').$this->path;
+        $params = $this->request->post("row/a");
+        $url = config('fastadmin.cmdb_api_url').$this->path.'/new';
         return  self::sendRequest($url, $params);
     }
+
+    /**
+     * @ApiTitle    (字段改变分组)
+     * @ApiSummary  (字段改变分组)
+     * @ApiMethod   (PUT)
+     * @ApiParams   (name="bk_obj_id", type="string", required=true, description="对象模型的ID，只能用英文字母序列命名")
+     * @ApiRoute    (/api/v3/Model/{id})
+     * 这里返回的是data数组
+     */
+    public function attrChangeGroup(){
+
+        $params = $this->request->post("row/a");
+        $url = config('fastadmin.cmdb_api_url').$this->path.'/property';
+        return  self::sendRequest($url, $params, 'PUT');
+     }
 
 
 }

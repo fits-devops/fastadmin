@@ -1064,8 +1064,8 @@ li {list-style-type:none;}
 }
 .choose-icon-box {
   position: absolute;
-  left: 0px;
-  top: 95px;
+  left: 50px;
+  top: 135px;
   width: 395px;
   height: 262px;
   background: #fff;
@@ -1921,4 +1921,159 @@ li {list-style-type:none;}
 }
 .icon-angle-right:before {
   content: "\E958";
+}
+
+.model-info {
+  padding: 0 24px 0 38px;
+  height: 100px;
+  background: rgba(235, 244, 255, 0.6);
+  font-size: 14px;
+}
+.model-info .choose-icon-wrapper {
+  position: relative;
+  float: left;
+}
+.model-info .choose-icon-wrapper .choose-icon-box {
+  position: absolute;
+  left: 0;
+  top: 95px;
+  width: 395px;
+  height: 262px;
+  background: #fff;
+  border: 1px solid #dde4e8;
+  -webkit-box-shadow: 0px 3px 6px 0px rgba(51, 60, 72, 0.13);
+  box-shadow: 0px 3px 6px 0px rgba(51, 60, 72, 0.13);
+  z-index: 99;
+}
+.model-info .choose-icon-wrapper .choose-icon-box:before {
+  position: absolute;
+  top: -13px;
+  left: 30px;
+  content: '';
+  border: 6px solid transparent;
+  border-bottom-color: rgba(51, 60, 72, 0.23);
+}
+.model-info .choose-icon-wrapper .choose-icon-box:after {
+  position: absolute;
+  top: -12px;
+  left: 30px;
+  content: '';
+  border: 6px solid transparent;
+  border-bottom-color: #fff;
+}
+.model-info .icon-box {
+  position: relative;
+  float: left;
+  margin-top: 14px;
+  margin: 14px 30px 0 0;
+  padding-top: 20px;
+  width: 72px;
+  height: 72px;
+  border: 1px solid #dde4eb;
+  border-radius: 50%;
+  background: #fff;
+  text-align: center;
+  font-size: 32px;
+  color: #3c96ff;
+  cursor: pointer;
+}
+.model-info .icon-box:hover .hover-text {
+  background: rgba(0, 0, 0, 0.5);
+  display: block;
+}
+.model-info .icon-box .hover-text {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 72px;
+  width: 72px;
+  font-size: 12px;
+  line-height: 72px;
+  border-radius: 50%;
+  text-align: center;
+  color: #fff;
+}
+.model-info .icon-box .icon {
+  vertical-align: top;
+}
+.model-info .icon-box .icon.ispre {
+  color: #868b97;
+}
+.model-info .model-text {
+  float: left;
+  margin: 32px 10px 32px 0;
+  line-height: 36px;
+  font-size: 0;
+}
+.model-info .model-text > span {
+  display: inline-block;
+  vertical-align: middle;
+  height: 36px;
+  font-size: 14px;
+}
+.model-info .model-text .text-content {
+  max-width: 200px;
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.model-info .model-text .text-content.id {
+  width: 110px;
+}
+.model-info .model-text .icon-cc-edit {
+  vertical-align: middle;
+  font-size: 14px;
+}
+.model-info .model-text .cmdb-form-item {
+  display: inline-block;
+  width: 200px;
+  vertical-align: top;
+}
+.model-info .model-text .cmdb-form-item input {
+  vertical-align: top;
+}
+.model-info .model-text .text-primary {
+  cursor: pointer;
+  margin-left: 5px;
+}
+.model-info .btn-group {
+  float: right;
+  height: 100px;
+  line-height: 100px;
+}
+.model-info .btn-group .label-btn {
+  position: relative;
+}
+.model-info .btn-group .label-btn.disabled {
+  cursor: not-allowed;
+}
+.model-info .btn-group .label-btn input[type="file"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+.model-info .btn-group .export-form {
+  display: inline-block;
+}
+.model-info .btn-group .label-btn {
+  margin-left: 10px;
+  cursor: pointer;
+}
+.model-info .btn-group .label-btn:hover {
+  color: #3c96ff;
+}
+.model-info .btn-group i,
+.model-info .btn-group span {
+  vertical-align: middle;
+}
+
+.model-detail-wrapper {
+  padding: 0;
+  height: 100%;
 }

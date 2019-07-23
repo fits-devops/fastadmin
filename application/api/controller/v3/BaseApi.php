@@ -14,7 +14,7 @@ use think\Exception;
 class BaseApi extends Api
 {
 
-    public static  function sendRequest($url, $params, $method = 'POST'){
+    public static  function sendRequest($url, $params = array(), $method = 'POST'){
         $options =  [
             CURLOPT_CONNECTTIMEOUT => 30,
             CURLOPT_TIMEOUT        => 30,
