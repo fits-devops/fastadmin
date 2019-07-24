@@ -39,8 +39,9 @@ class Attribute extends BaseApi
      * @ApiMethod   (GET)
      * @ApiRoute    (/api/V3/Model/index)
      */
-    public function index($obj)
+    public function index()
     {
+        $obj = $this->request->param('obj', 'host');
         $params = array(
             "bk_obj_id"=>$obj
         );
@@ -89,9 +90,9 @@ class Attribute extends BaseApi
      */
     public function read($id)
     {
-
+        $obj = $this->request->param('obj', 'host');
         $params = array(
-            "bk_obj_id"=>$this->bk_obj_id,
+            "bk_obj_id"=>$obj,
             "id"=> $id,
             "bk_supplier_account"=>"0",
         );
@@ -111,8 +112,25 @@ class Attribute extends BaseApi
     {
 
         $params = $this->request->post("row/a");
-        $params['bk_obj_id'] = $this->bk_obj_id;
         $params['bk_property_group'] = 'default';
+        $params['creator'] = 'admin';
+        if(in_array($params['bk_property_type'],array("float","int"))){
+            $params['option']['max'] = $params['max'];
+            $params['option']['min'] = $params['min'];
+            unset($params['max']);
+            unset($params['min']);
+        }
+        if($params['bk_property_type'] === 'enum'){
+            if(isset($params['comment'])){
+                $params['comment'] = \GuzzleHttp\json_decode(htmlspecialchars_decode($params['comment']),true);
+                $isDefault = true;
+                foreach ($params['comment'] as $key=>$value) {
+                    $params['option'][] = array('id' =>"$key", 'name'=>$value,'is_default'=>$isDefault);
+                    $isDefault = false;
+                }
+                unset($params['comment']);
+            }
+        }
         $url = config('fastadmin.cmdb_api_url').$this->path;
         return  self::sendRequest($url,\GuzzleHttp\json_encode($params));
     }

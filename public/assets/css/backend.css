@@ -2077,3 +2077,64 @@ li {list-style-type:none;}
   padding: 0;
   height: 100%;
 }
+
+/*枚举*/
+.form-enum-wrapper > .form-item[data-v-2df16cae] {
+  font-size: 0;
+}
+.form-enum-wrapper > .form-item[data-v-2df16cae]:not(:first-child) {
+  margin-top: 15px;
+}
+.form-enum-wrapper > .form-item .enum-default[data-v-2df16cae] {
+  float: left;
+  margin: 0;
+  padding: 8px 5px 0 0;
+  height: 36px;
+  font-size: 16px;
+  line-height: 1;
+}
+.form-enum-wrapper > .form-item .enum-label[data-v-2df16cae] {
+  float: left;
+  padding-right: 10px;
+  font-size: 14px;
+  line-height: 36px;
+  text-align: center;
+  width: 55px;
+}
+.form-enum-wrapper > .form-item .enum-id[data-v-2df16cae] {
+  float: left;
+  width: 90px;
+  margin-right: 10px;
+}
+.form-enum-wrapper > .form-item .enum-id input[data-v-2df16cae] {
+  width: 100%;
+}
+.form-enum-wrapper > .form-item .enum-name[data-v-2df16cae] {
+  float: left;
+  width: 180px;
+}
+.form-enum-wrapper > .form-item .enum-name input[data-v-2df16cae] {
+  width: 100%;
+}
+.form-enum-wrapper > .form-item .enum-btn[data-v-2df16cae] {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  margin-left: 5px;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1;
+  border: 1px solid #bec6de;
+  background-color: #ffffff;
+  outline: 0;
+}
+.form-enum-wrapper > .form-item .enum-btn[data-v-2df16cae]:disabled {
+  cursor: not-allowed;
+  background-color: #eee;
+  border-color: #eee;
+  color: #bec6de;
+}
+.icon-plus:before {
+  content: "\E9AA";
+}

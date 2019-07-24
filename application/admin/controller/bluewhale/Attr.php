@@ -47,8 +47,9 @@ class Attr extends Backend
     /**
      * 查看
      */
-    public function index($obj = null)
+    public function index()
     {
+        $obj = $this->request->param('obj', 'host');
         if ($this->request->isAjax())
         {
 
@@ -72,7 +73,7 @@ class Attr extends Backend
         if ($this->request->isAjax())
         {
 
-            $res =$this->model->index($obj);
+            $res =$this->model->index();
             $res =\GuzzleHttp\json_decode($res,true);
             $list = $res['data'];
 
@@ -100,17 +101,16 @@ class Attr extends Backend
         return $this->view->fetch('index');
     }
 
-    public function table3($obj)
+    public function table3()
     {
-        $this->obj = $obj;
         if ($this->request->isAjax())
         {
             $model = new \app\api\controller\v3\Association;
-            $res = $model->index($obj);
+            $res = $model->index();
             $res =\GuzzleHttp\json_decode($res,true);
             $list = $res['data'];
 
-            $result = array("total" =>count($list), "rows" => $list,'d'=>$obj);
+            $result = array("total" =>count($list), "rows" => $list);
 
             return json($result);
         }
@@ -134,9 +134,13 @@ class Attr extends Backend
         }
         $item = array(
             'singlechar' =>'短字符',
-            'int' => '数字'
+            'int' => '数字',
+            'float' => '浮点数',
+            'enum' => '枚举'
         );
+        $obj = $this->request->param('obj', 'host');
         $this->view->assign("item",$item);
+        $this->view->assign("obj",$obj);
         return $this->view->fetch();
     }
 

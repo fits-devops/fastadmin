@@ -32,15 +32,64 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form','cmdbIcon'], function 
             $("body").on('click','#icon-box li',function (e) {
                 e.preventDefault();
                 var icon = $(this).attr('data-icon');
-                var id = 12;
-                // row 不使用
+                var id = $("#obj-id").data('id');
+                // 更新图标
                 Fast.api.ajax({
                     url:"/admin/bluewhale/model/changIcon/ids/"+id,
                     data:{"row":{"bk_obj_icon":icon}},
                 }, function (data, ret) {
                     cmdbIcon.hide();
-                    window.location.reload();
+                    $(".choose-icon-wrapper i").attr('class','icon '+icon +' ispre');
                 });
+            });
+            $("body").on('click',function (e) {
+                e.preventDefault();
+                // 点击其他地方隐藏 图标插件
+                if($(e.target).attr('class')!='hover-text') {
+                   cmdbIcon.hide();
+                }
+            });
+
+            // 更改模型名字
+            $("body").on('click',".icon-cc-edit",function () {
+                var $bk_obj_name = $("#bk_obj_name");
+                var name = $bk_obj_name.text();
+                $bk_obj_name.remove();
+                var html = '<div class="cmdb-form-item">' +
+                    '<input  type="text" name="modelName" id="modelName" class="cmdb-form-input" aria-required="true" aria-invalid="false">' +
+                    '</div>' +
+                    '<span class="text-primary save">保存</span>' +
+                    '<span  class="text-primary cancle">取消</span>';
+
+                $(this).after(
+                    html
+                ).remove();
+                $("#modelName").val(name);
+                // 取消还原
+                $("body").on('click','.cancle',function () {
+                    $(this).after('<span class="text-content" id="bk_obj_name">'+name+'</span><i class="icon icon-cc-edit text-primary"></i>');
+                    $('.save').remove();
+                    $(this).remove();
+                    $('.cmdb-form-item').remove();
+
+                });
+
+                // 保存更新姓名
+                $("body").on('click','.save',function () {
+                    var name = $("#modelName").val();
+                    var $that =   $(this);
+                    var id = $("#obj-id").data('id');
+                    Fast.api.ajax({
+                        url:"/admin/bluewhale/model/changIcon/ids/"+id,
+                        data:{"row":{"bk_obj_name":name}},
+                    }, function (data, ret) {
+                        $that.after('<span class="text-content" id="bk_obj_name">'+name+'</span><i class="icon icon-cc-edit text-primary"></i>');
+                        $('.cancle').remove();
+                        $that.remove();
+                        $('.cmdb-form-item').remove();
+                    });
+                });
+
 
             });
         },
@@ -50,9 +99,9 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form','cmdbIcon'], function 
                 // 初始化表格参数配置
                 Table.api.init({
                     extend: {
-                        index_url: 'bluewhale/attr/index/obj' + Controller.config.bk_obj_id,
-                        add_url: 'bluewhale/attr/add',
-                        edit_url: 'bluewhale/attr/edit',
+                        index_url: 'bluewhale/attr/index/obj/' + Controller.config.bk_obj_id,
+                        add_url: 'bluewhale/attr/add/obj/' + Controller.config.bk_obj_id,
+                        edit_url: 'bluewhale/attr/edit/obj/'+Controller.config.bk_obj_id,
                         del_url: 'bluewhale/attr/del',
                         multi_url: '',
                         table: 'bluewhale'
@@ -124,6 +173,23 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form','cmdbIcon'], function 
             }
         },
         add: function () {
+            $('body').on('change','#attr_type',function () {
+                var $this = $(this);
+                var  val = $this.val();
+                if(val === 'int' || val === 'float'){
+                    $("#max,#min").removeClass('hidden');
+                }else{
+                    $("#max,#min").addClass('hidden');
+                }
+                // 枚举
+                if(val === 'enum'){
+                    $(".form-enum-wrapper").removeClass('hidden');
+                }else{
+                    $(".form-enum-wrapper").addClass('hidden');
+                }
+            });
+
+
             Controller.api.bindevent();
         },
         edit: function () {

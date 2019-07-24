@@ -66,14 +66,11 @@ class Model extends BaseApi
      * @ApiRoute    (/api/v3/Model/{id})
      * 这里返回的是data数组
      */
-    public function update($id,$params)
+    public function update($id)
     {
-
-        $params_json = \GuzzleHttp\json_encode($params,JSON_UNESCAPED_UNICODE);
-        $url = config('fastadmin.cmdb_api_url')."/object/classification/".$id;
-        $datas_json = self::sendRequest($url, $params_json, 'PUT');
-        $result = json_decode($datas_json,true);
-        return  $result;
+        $params = $this->request->post("row/a");
+        $url = config('fastadmin.cmdb_api_url')."/object/".$id;
+        return  self::sendRequest($url, \GuzzleHttp\json_encode($params), 'PUT');
     }
 
     /**
@@ -113,4 +110,11 @@ class Model extends BaseApi
         return  $result;
     }
 
+    public function updateIcon($id)
+    {
+        $params = $this->request->post("row/a");
+        $url = config('fastadmin.cmdb_api_url')."/update/object/".$id;
+        return  self::sendRequest($url, \GuzzleHttp\json_encode($params), 'PUT');
+
+    }
 }
