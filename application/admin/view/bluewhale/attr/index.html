@@ -3,17 +3,18 @@
     <div  class="model-info" style="position: relative;">
         <div  class="choose-icon-wrapper">
             <div  class="icon-box">
-                <i  class="icon icon-cc-default ispre" style=" padding-left: 12px;"></i>
+                <i  class="icon {:$res['bk_obj_icon']} ispre" style=" padding-left: 12px;"></i>
                 <p  class="hover-text">点击切换</p>
             </div> <!---->
         </div>
         <div  class="model-text">
             <span >唯一标识：</span>
-            <span  class="text-content id" id="obj-id">bk_apache</span>
+            <span  class="text-content id" id="obj-id">{:$res['bk_obj_id']}</span>
         </div>
         <div  class="model-text">
             <span >名称：</span>
-            <span  class="text-content">bk_apache</span> <!---->
+            <span  class="text-content">{:$res['bk_obj_name']}</span> <!---->
+            <i class="icon icon-cc-edit text-primary"></i>
         </div>
     </div>
     <div class="panel-heading">

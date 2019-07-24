@@ -50,7 +50,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form','cmdbIcon'], function 
                 // 初始化表格参数配置
                 Table.api.init({
                     extend: {
-                        index_url: 'bluewhale/attr/index' + location.search,
+                        index_url: 'bluewhale/attr/index/obj' + Controller.config.bk_obj_id,
                         add_url: 'bluewhale/attr/add',
                         edit_url: 'bluewhale/attr/edit',
                         del_url: 'bluewhale/attr/del',
@@ -60,7 +60,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form','cmdbIcon'], function 
                 });
                 var table1 = $("#table1");
                 table1.bootstrapTable({
-                    url: 'bluewhale/attr/table1',
+                    url: 'bluewhale/attr/table1/obj/'+ Controller.config.bk_obj_id,
                     toolbar: '#toolbar1',
                     sortName: 'id',
                     search: false,
