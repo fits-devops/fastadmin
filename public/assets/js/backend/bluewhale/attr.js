@@ -121,7 +121,31 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form','cmdbIcon'], function 
 
                 // 为表格2绑定事件
                 Table.api.bindevent(table2);
-            }
+            },
+            fourth: function () {
+                // 表格4
+                var table4 = $("#table4");
+                table4.bootstrapTable({
+                    url: 'bluewhale/attr/table4/obj/'+Controller.config.bk_obj_id,
+                    extend: {
+                        index_url: 'bluewhale/attr/table4/obj/'+Controller.config.bk_obj_id,
+                        add_url: 'bluewhale/association/add/obj/'+Controller.config.bk_obj_id,
+                        edit_url: 'bluewhale/association/edit/obj/'+Controller.config.bk_obj_id,
+                        del_url: 'bluewhale/association/del',
+                    },
+                    toolbar: '#toolbar4',
+                    sortName: 'id',
+                    bk_obj_id: Controller.config.bk_obj_id,
+                    search: false,
+                    showToggle: false,
+                    showColumns: false,
+                    showExport: false,
+                    commonSearch: false,
+                });
+
+                // 为表格4绑定事件
+                Table.api.bindevent(table4);
+            },
         },
         add: function () {
             Controller.api.bindevent();

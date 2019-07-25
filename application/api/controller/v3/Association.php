@@ -123,5 +123,37 @@ class Association extends BaseApi
         return  self::sendRequest($url,\GuzzleHttp\json_encode($params));
     }
 
+    /**
+     * @ApiTitle    (获取分组信息)
+     * @ApiSummary  (获取分组信息)
+     * @ApiMethod   (POST)
+     * @ApiParams
+     * @ApiRoute    /objectatt/group/property/owner/{bk_supplier_account}/object/{bk_obj_id}
+     * 这里返回的是data数组
+     */
+    public function showgroup($bk_obj_id)
+    {
+        $url = config('fastadmin.cmdb_api_url').'/objectatt/group/property/owner/0/object/'.$bk_obj_id;
+        $datas_json = self::sendRequest($url);
+        $result = json_decode($datas_json,true);
+        return  $result;
+    }
+
+    /**
+     * @ApiTitle    (获取分组信息)
+     * @ApiSummary  (获取分组信息)
+     * @ApiMethod   (POST)
+     * @ApiParams   {"bk_obj_id":"'.$bk_obj_id.'","bk_supplier_account":"0"}
+     * @ApiRoute    /objectatt/group/property/owner/{bk_supplier_account}/object/{bk_obj_id}
+     * 这里返回的是data数组
+     */
+    public function getgroupdata($bk_obj_id)
+    {
+        $param = '{"bk_obj_id":"'.$bk_obj_id.'","bk_supplier_account":"0"}';
+        $url = config('fastadmin.cmdb_api_url').'/find/objectattr';
+        $datas_json = self::sendRequest($url,$param);
+        $result = json_decode($datas_json,true);
+        return  $result;
+    }
 
 }

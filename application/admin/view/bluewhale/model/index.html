@@ -1,5 +1,5 @@
 
-<link href="/assets/css/bluewhale.css" rel="stylesheet">
+<link href="/assets/css/model.css" rel="stylesheet">
 
 
 <main  class="main-layout" style="position: relative;">
@@ -59,7 +59,7 @@
                             </div>
                             <div class="model-details">
                                 <p title="v[bk_obj_name]" class="model-name">{$v.bk_obj_name|htmlentities}</p>
-                                <p title="v[bk_obj_id]" class="model-id"></p>
+                                <p title="v[bk_obj_id]" class="model-id">{$v.bk_obj_id|htmlentities}</p>
                             </div>
                                 </a>
                         </li>
@@ -69,124 +69,7 @@
                 <?php endforeach?>
 
             </ul>
-            <!--<section class="bk-dialog group-dialog dialog" style="display: none;">-->
-                <!--<div class="bk-dialog-wrapper">-->
-                    <!--<div class="bk-dialog-position">-->
-                        <!--<div class="bk-dialog-style" style="width: 600px;">-->
-                            <!--&lt;!&ndash;&ndash;&gt;-->
-                            <!--&lt;!&ndash;&ndash;&gt;-->
-                            <!--<div class="bk-dialog-body" style="padding: 0px;">-->
-                                <!--<div class="dialog-content">-->
-                                    <!--<p class="title">新建分组</p>-->
-                                    <!--<div class="content">-->
-                                        <!--<label >-->
-                                            <!--<div class="label-title">-->
-                                                <!--唯一标识-->
-                                                <!--<span class="color-danger">*</span>-->
-                                            <!--</div>-->
-                                            <!--<div class="cmdb-form-item">-->
-                                                <!--<input type="text" name="classifyId" placeholder="请输入唯一标识" class="cmdb-form-input" aria-required="true" aria-invalid="true" />-->
-                                                <!--<p class="form-error"></p>-->
-                                            <!--</div> <i class="bk-icon icon-info-circle has-tooltip"></i></label>-->
-                                        <!--<label ><span class="label-title"> 名称 </span> <span class="color-danger">*</span>-->
-                                            <!--<div class="cmdb-form-item">-->
-                                                <!--<input type="text" name="classifyName" placeholder="请输入名称" class="cmdb-form-input" aria-required="true" aria-invalid="true" />-->
-                                                <!--<p class="form-error"></p>-->
-                                            <!--</div></label>-->
-                                    <!--</div>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <!--<div class="bk-dialog-footer bk-d-footer">-->
-                                <!--<div class="footer">-->
-                                    <!--<button title="" class="bk-button bk-primary bk-button-normal">-->
-                                        <!--&lt;!&ndash;&ndash;&gt; <span>保存</span></button>-->
-                                    <!--<button title="" class="bk-button bk-default bk-button-normal">-->
-                                        <!--&lt;!&ndash;&ndash;&gt; <span>取消</span></button>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</section>-->
-            <!--<section  class="bk-dialog model-dialog dialog" style="display: none;">-->
-                <!--<div class="bk-dialog-wrapper">-->
-                    <!--<div class="bk-dialog-position">-->
-                        <!--<div class="bk-dialog-style" style="width: 600px;">-->
-                            <!--&lt;!&ndash;&ndash;&gt;-->
-                            <!--&lt;!&ndash;&ndash;&gt;-->
-                            <!--<div class="bk-dialog-body" style="padding: 0px;">-->
-                                <!--<div  class="dialog-content">-->
-                                    <!--<p  class="title">新建模型</p>-->
-                                    <!--<div  class="content clearfix">-->
-                                        <!--<div  class="content-left">-->
-                                            <!--<div  class="icon-wrapper">-->
-                                                <!--<i  class="icon-cc-default"></i>-->
-                                            <!--</div>-->
-                                            <!--<div  class="text">-->
-                                                <!--选择图标-->
-                                            <!--</div>-->
-                                        <!--</div>-->
-                                        <!--<div  class="content-right">-->
-                                            <!--<div  class="label-item">-->
-                                                <!--<span  class="label-title">所属分组</span>-->
-                                                <!--<span  class="color-danger">*</span>-->
-                                                <!--<div  class="cmdb-form-item">-->
-                                                    <!--<div   class="bk-selector form-selector selector-box" name="modelGroup" content-max-height="200" selected="selected" aria-required="true" aria-invalid="true">-->
-                                                        <!--<div class="bk-selector-wrapper">-->
-                                                            <!--<input readonly="readonly" placeholder="请选择" class="bk-selector-input placeholder" />-->
-                                                            <!--<i class="bk-icon icon-angle-down bk-selector-icon"></i>-->
-                                                            <!--<i class="bk-icon icon-close bk-selector-icon clear-icon" style="display: none;"></i>-->
-                                                            <!--<div class="bk-spin-loading bk-spin-loading-mini bk-spin-loading-primary selector-loading-icon" style="display: none;">-->
-                                                                <!--<div class="rotate rotate1"></div>-->
-                                                                <!--<div class="rotate rotate2"></div>-->
-                                                                <!--<div class="rotate rotate3"></div>-->
-                                                                <!--<div class="rotate rotate4"></div>-->
-                                                                <!--<div class="rotate rotate5"></div>-->
-                                                                <!--<div class="rotate rotate6"></div>-->
-                                                                <!--<div class="rotate rotate7"></div>-->
-                                                                <!--<div class="rotate rotate8"></div>-->
-                                                            <!--</div>-->
-                                                        <!--</div>-->
-                                                        <!--<div class="bk-selector-list" style="display: none;">-->
-                                                            <!--&lt;!&ndash;&ndash;&gt;-->
-                                                            <!--<ul class="outside-ul" style="max-height: 300px;">-->
-                                                                <!--<li class="bk-selector-list-item">-->
-                                                                    <!--<div class="text no-search-result">-->
-                                                                        <!--无自定义分组-->
-                                                                    <!--</div></li>-->
-                                                            <!--</ul>-->
-                                                        <!--</div>-->
-                                                    <!--</div>-->
-                                                    <!--<p  class="form-error"></p>-->
-                                                <!--</div>-->
-                                            <!--</div>-->
-                                            <!--<label ><span  class="label-title">唯一标识</span> <span  class="color-danger">*</span>-->
-                                                <!--<div  class="cmdb-form-item">-->
-                                                    <!--<input  type="text" name="modelId" placeholder="请输入唯一标识" class="cmdb-form-input" aria-required="true" aria-invalid="true" />-->
-                                                    <!--<p  class="form-error"></p>-->
-                                                <!--</div> <i  class="bk-icon icon-info-circle has-tooltip"></i></label>-->
-                                            <!--<label ><span  class="label-title">名称</span> <span  class="color-danger">*</span>-->
-                                                <!--<div  class="cmdb-form-item">-->
-                                                    <!--<input  type="text" name="modelName" placeholder="请输入名称" class="cmdb-form-input" aria-required="true" aria-invalid="true" />-->
-                                                    <!--<p  class="form-error"></p>-->
-                                                <!--</div> <i  class="bk-icon icon-info-circle has-tooltip"></i></label>-->
-                                        <!--</div>-->
-                                    <!--</div>-->
-                                    <!--&lt;!&ndash;&ndash;&gt;-->
-                                <!--</div>-->
-                            <!--</div>-->
-                            <!--<div class="bk-dialog-footer bk-d-footer">-->
-                                <!--<div  class="footer">-->
-                                    <!--<button  title="" class="bk-button bk-primary bk-button-normal">-->
-                                        <!--&lt;!&ndash;&ndash;&gt; <span>保存</span></button>-->
-                                    <!--<button  title="" class="bk-button bk-default bk-button-normal">-->
-                                        <!--&lt;!&ndash;&ndash;&gt; <span>取消</span></button>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</section>-->
+
         </div>
         <div class="resize-triggers">
             <div class="expand-trigger">
@@ -196,15 +79,15 @@
             <div class="contract-trigger"></div>
         </div>
     </div>
-    <!--<div class="bk-loading" style="position: absolute; background-color: rgba(255, 255, 255, 0.9); display: none;">-->
-        <!--<div class="bk-loading-wrapper">-->
-            <!--<div class="bk-loading1">-->
-                <!--<div class="point point1"></div>-->
-                <!--<div class="point point2"></div>-->
-                <!--<div class="point point3"></div>-->
-                <!--<div class="point point4"></div>-->
-            <!--</div>-->
-            <!--<div class="bk-loading-title"></div>-->
-        <!--</div>-->
-    <!--</div>-->
+    <div class="bk-loading" style="position: absolute; background-color: rgba(255, 255, 255, 0.9); display: none;">
+        <div class="bk-loading-wrapper">
+            <div class="bk-loading1">
+                <div class="point point1"></div>
+                <div class="point point2"></div>
+                <div class="point point3"></div>
+                <div class="point point4"></div>
+            </div>
+            <div class="bk-loading-title"></div>
+        </div>
+    </div>
 </main>

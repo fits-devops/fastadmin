@@ -30,8 +30,8 @@ class Attr extends Backend
         $statusList = array(
            'first'=> '模型字段',
             'second'=>'模型关联',
-            'three'=>'唯一校验',
-           'four' => '字段分组',
+            'third'=>'唯一校验',
+           'fourth' => '字段分组',
         );
         $this->model = new \app\api\controller\v3\Attribute;
         $this->view->assign("statusList",$statusList);
@@ -64,6 +64,8 @@ class Attr extends Backend
         $res = $model->read($obj);
         $res = \GuzzleHttp\json_decode($res,true);
         $this->view->assign("res",$res['data'][0]);
+        $table4 = $this->table4($res['data'][0]['bk_obj_id']);
+        $this->view->assign("table4", $table4);
         return $this->view->fetch();
     }
 
@@ -117,6 +119,44 @@ class Attr extends Backend
         return $this->view->fetch('index');
     }
 
+    //table4的内容,返回为数组
+    public function table4($obj)
+    {
+            $this->obj = $obj;
+            $model = new \app\api\controller\v3\Association;
+            $res = $model->showgroup($obj);
+            $groupdata = $model->getgroupdata($obj);
+            //输出的数组
+            $result =[];
+            //不在分组内的none内容
+            $none = [];
+            //判断是否已经存好none
+            $isAlreadyNone = true;
+            foreach($res['data'] as $resK=>$resV){
+                foreach($groupdata['data'] as $gK =>$gV){
+                    if($resV['bk_group_id'] == $gV['bk_property_group']){
+                            $result[$resV['bk_group_name']][] = [
+                                'bk_property_group'=>$gV['bk_property_group'],
+                                'bk_property_name'=>$gV['bk_property_name'],
+                            ];
+                    }
+                    //还有一种情况就是不在分组内的,这时bk_property_group为none
+                    elseif($gV['bk_property_group'] == 'none' &&$isAlreadyNone ==true){
+                        $none[] =[
+                            'bk_property_group'=>$gV['bk_property_group'],
+                            'bk_property_name'=>$gV['bk_property_name'],
+
+                        ];
+                    }
+                }
+                //none数组已完成,将$isAlreadyNone改为false阻止其下次继续加数组到none数组内
+                $isAlreadyNone = false;
+            }
+            //将none数组加入$result后面.保证none数组是最后一个数组
+            $result['更多属性']=$none;
+//            $result_json = json_encode($result);
+            return $result;
+    }
 
     /**
      * 添加

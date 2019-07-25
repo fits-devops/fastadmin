@@ -1,3 +1,4 @@
+<link href="/assets/css/bluewhale.css" rel="stylesheet">
 <div class="panel panel-default panel-intro">
     {include file="common/cmdbIcon" /}
     <div  class="model-info" style="position: relative;">
@@ -51,19 +52,42 @@
                 <table id="table2" class="table table-striped table-bordered table-hover" width="100%">
                 </table>
             </div>
-            <div class="tab-pane fade" id="three">
+            <div class="tab-pane fade" id="third">
                 <div id="toolbar3" class="toolbar">
                     {:build_toolbar('refresh')}
                 </div>
                 <table id="table3" class="table table-striped table-bordered table-hover" width="100%">
                 </table>
             </div>
-            <div class="tab-pane fade" id="four">
+            <div class="tab-pane fade" id="fourth">
                 <div id="toolbar4" class="toolbar">
                     {:build_toolbar('refresh')}
                 </div>
-                <table id="toolbar4" class="table table-striped table-bordered table-hover" width="100%">
-                </table>
+                <!--<table id="table4" class="table table-striped table-bordered table-hover" width="100%">-->
+                <!--</table>-->
+                <div  class="group-wrapper views-layout">
+                    <ul class="group-list">
+                        <?php foreach ($table4 as $k=>$row):?>
+                        <li class="group-item clearfix">
+                            <?php $count = count($row);?>
+                            <div class="group-title">
+                                <span>{:$k}</span>
+                                <span class="number">({$count|htmlentities})</span>
+                            </div>
+                            <ul class="model-list clearfix">
+                                <?php foreach ($row as $k=>$v):?>
+                                <li class="model-item ispre">
+                                        <div class="model-details">
+                                            <p title="v[bk_property_name]" class="model-name">{$v.bk_property_name|htmlentities}</p>
+                                        </div>
+                                </li>
+                                <?php endforeach?>
+                            </ul>
+                        </li>
+                        <?php endforeach?>
+
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
