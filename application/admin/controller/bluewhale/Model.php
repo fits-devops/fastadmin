@@ -47,7 +47,9 @@ class Model extends Backend
      */
     public function index()
     {
-        $result = $this->apiModel->index();
+
+        $datas_json = $this->apiModel->index();
+        $result = json_decode($datas_json,true);
         $this->view->assign("rows", $result['data']);
         return $this->view->fetch();
     }
@@ -59,11 +61,10 @@ class Model extends Backend
     public function add()
     {
         if ($this->request->isPost()) {
-            $params = $this->request->post("row/a");
-            $result = $this->apiModel->save($params);
-            $params['id']=$result['data']['id'];
+            $datas_json = $this->apiModel->save();
+            $result = json_decode($datas_json,true);
             if($result['result']!=false){
-                $this->success('',null,$params);
+                $this->success('',null,$result['data']);
             }else{
                 $this->error( $result['bk_error_msg']);
             }
@@ -88,7 +89,8 @@ class Model extends Backend
         //调用接口获取该条记录的内容
         //注意参数id的值必须为整型
         $params = json_encode(['id'=>intval($ids)]);
-        $datas_arr = $this->apiModel->index($params);
+        $datas_json = $this->apiModel->index($params);
+        $datas_arr = json_decode($datas_json,true);
         if($datas_arr['result']){
             $data = $datas_arr['data'];
             $row = $data[0];
@@ -100,9 +102,9 @@ class Model extends Backend
 
         //修改内容
         if ($this->request->isPost()) {
-//            $params = \GuzzleHttp\json_encode($this->request->post("row/a"),JSON_UNESCAPED_UNICODE);
             $params = $this->request->post("row/a");
-            $result = $this->apiModel->update($ids,$params);
+            $datas_json = $this->apiModel->update($ids);
+            $result = json_decode($datas_json,true);
             if($result['result']!=false){
                 $this->success('操作成功',null,$params);
             }else{
@@ -120,7 +122,8 @@ class Model extends Backend
     {
 
         if($ids){
-            $result = $this->apiModel->delete($ids);
+            $datas_json = $this->apiModel->delete($ids);
+            $result = json_decode($datas_json,true);
             if($result['result']!=false){
                 $this->success();
             }else{

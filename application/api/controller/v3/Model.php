@@ -36,8 +36,7 @@ class Model extends BaseApi
     {
 
         $url = config('fastadmin.cmdb_api_url')."/object/classification/0/objects";
-        $datas_json = self::sendRequest($url, $params, 'post');
-        $result = json_decode($datas_json,true);
+        $result = self::sendRequest($url, $params, 'post');
         return  $result;
 
     }
@@ -48,14 +47,14 @@ class Model extends BaseApi
      * @ApiMethod   (DELETE)
      * @ApiParams   (name="id", type="integer", required=true, description="模型ID")
      * @ApiRoute    (/api/v3/Model/{id})
-     * 这里返回的是data数组
+     * 这里返回的是json
      */
     public function delete($id)
     {
 
         $url = config('fastadmin.cmdb_api_url')."/object/classification/".$id;
-        $datas_json = self::sendRequest($url, $params=[], 'DELETE');
-        $result = json_decode($datas_json,true);
+        $result = self::sendRequest($url, $params=[], 'DELETE');
+//        $result = json_decode($datas_json,true);
         return  $result;
     }
 
@@ -64,13 +63,15 @@ class Model extends BaseApi
      * @ApiSummary  (获取插件商店的插件列表信息)
      * @ApiMethod   (PUT)
      * @ApiRoute    (/api/v3/Model/{id})
-     * 这里返回的是data数组
+     * 这里返回的是json
      */
     public function update($id)
     {
-        $params = $this->request->post("row/a");
-        $url = config('fastadmin.cmdb_api_url')."/object/".$id;
-        return  self::sendRequest($url, \GuzzleHttp\json_encode($params), 'PUT');
+        $params_json = \GuzzleHttp\json_encode($this->request->post("row/a"),JSON_UNESCAPED_UNICODE);
+        $url = config('fastadmin.cmdb_api_url')."/object/classification/".$id;
+        $result = self::sendRequest($url,$params_json, 'PUT');
+//        $result = json_decode($datas_json,true);
+        return  $result;
     }
 
     /**
@@ -79,7 +80,7 @@ class Model extends BaseApi
      * @ApiMethod   (GET)
      * @ApiParams   (name="bk_obj_id", type="string", required=true, description="对象模型的ID，只能用英文字母序列命名")
      * @ApiRoute    (/api/v3/Model/{bk_obj_id})
-     * 这里返回的是data数组
+     * 这里返回的是josn字符串
      */
     public function read($bk_obj_id)
     {
@@ -98,15 +99,13 @@ class Model extends BaseApi
      * @ApiMethod   (POST)
      * @ApiParams   (name="data", type="object", sample="{'user_id':'int','user_name':'string','profile':{'email':'string','age':'integer'}}", description="扩展数据")
      * @ApiRoute    (/api/v3/Model/{id})
-     * 这里返回的是data数组
+     * 这里返回的是josn字符串
      */
-    public function save($params)
+    public function save()
     {
-
-        $params_json = \GuzzleHttp\json_encode($params,JSON_UNESCAPED_UNICODE);
+        $params_json = \GuzzleHttp\json_encode($this->request->post("row/a"),JSON_UNESCAPED_UNICODE);
         $url = config('fastadmin.cmdb_api_url')."/object/classification";
-        $datas_json = self::sendRequest($url, $params_json);
-        $result = json_decode($datas_json,true);
+        $result = self::sendRequest($url, $params_json);
         return  $result;
     }
 

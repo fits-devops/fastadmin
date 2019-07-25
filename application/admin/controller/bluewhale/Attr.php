@@ -124,8 +124,8 @@ class Attr extends Backend
     {
             $this->obj = $obj;
             $model = new \app\api\controller\v3\Association;
-            $res = $model->showgroup($obj);
-            $groupdata = $model->getgroupdata($obj);
+            $res = json_decode($model->showgroup($obj),true);
+            $groupdata = json_decode($model->getgroupdata($obj),true);
             //输出的数组
             $result =[];
             //不在分组内的none内容

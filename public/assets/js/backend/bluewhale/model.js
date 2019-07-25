@@ -53,7 +53,6 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
             $('#create-group').on('click',function(){
                 Fast.api.open("/admin/bluewhale/model/add", __('Add'),{
                     callback:function(value){
-                        console.log(value);
                         var html = '' +
                             '<li class="group-item clearfix">'+
                             '<div class="group-title">'+
@@ -73,7 +72,6 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                             '<ul class="model-list clearfix">'+
                             '</ul>'+
                             '</li>' ;
-                        console.log(html);
                         $('.group-list').append(html);
                     }
                 });
@@ -81,10 +79,10 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
 
             $('body').on('click','.icon-cc-edit',function(){
                 var id = $(this).attr('data-id');
-                var name = 'name_'+id;
+                var name = '.name_'+id;
                 Fast.api.open("/admin/bluewhale/model/edit?ids="+$(this).attr('data-id'), __('Edit'), {
                     callback:function(value){
-                        $('.'+name).text(value.data.bk_classification_name);
+                        $(name).text(value.data.bk_classification_name);
                     }
                 });
             })
