@@ -4,6 +4,7 @@ namespace app\admin\controller\bluewhale;
 
 use app\common\controller\Backend;
 
+use app\api\controller\v3\Model;
 /**
  * 蓝鲸系统
  *
@@ -80,7 +81,10 @@ class Association extends Backend
             '1:n' => '1-N',
             'n:n' => 'N-N'
         );
+        $mode = new Model();
+        $arr = $mode->index();
         $this->view->assign("item",$item);
+        $this->view->assign("modelGroup",$arr['data']);
         $this->view->assign("mapping",$mapping);
         $this->view->assign("obj",$obj);
         return $this->view->fetch();
