@@ -133,7 +133,9 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form','cmdbIcon'], function 
                                 formatter: Table.api.formatter.operate
                             }
                         ]
-                    ]
+                    ],
+                    showExport: false,
+                    showSearch: false
                 });
 
                 // 为表格1绑定事件
@@ -154,6 +156,8 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form','cmdbIcon'], function 
                     sortName: 'id',
                     bk_obj_id: Controller.config.bk_obj_id,
                     search: false,
+                    showExport: false,
+                    showSearch: false,
                     columns: [
                         [
                             {field: 'bk_obj_asst_id', title: __('bk_obj_asst_id')},
@@ -214,6 +218,8 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form','cmdbIcon'], function 
                     sortName: 'id',
                     bk_obj_id: Controller.config.bk_obj_id,
                     search: false,
+                    showExport: false,
+                    showSearch: false,
                     columns: [
                         [
                             {field: 'name', title: __('bk_obj_asst_id')},
