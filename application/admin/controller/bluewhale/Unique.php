@@ -41,22 +41,47 @@ class Unique extends Backend
         if ($this->request->isAjax())
         {
 
-            $res =$this->model->index();
-            $res =\GuzzleHttp\json_decode($res,true);
-            $list = $res['data'];
+            $objUnique = $this->model->index();
+            $objAttr = $this->model->objectAttr();
+
+            $objUnique = \GuzzleHttp\json_decode($objUnique,true);
+            $objAttr = \GuzzleHttp\json_decode($objAttr,true);
+
+            $objUnique = $objUnique['data'];
+            $objAttr   = $objAttr['data'];
+
+            $idArr = [];
+            foreach ($objAttr as $value){
+                $idArr[$value['id']] = $value['bk_property_name'];
+            }
+            $list = [];
+            foreach ($objUnique as $key=>$uniqueArr){
+                $arr = [];
+                $arr['must_check'] = $uniqueArr['must_check'];
+                $idKey = '';
+                $name = '';
+                foreach ($uniqueArr['keys'] as $val){
+                    $idKey .= $val['key_id'].'_';
+                    $name .= $idArr[$val['key_id']].'+';
+                }
+                $arr['ids'] = trim($idKey,'_');
+                $arr['id'] = $uniqueArr['id'];
+                $arr['name'] = trim($name,'+');
+                $list[] = $arr;
+            }
 
             $result = array("total" =>count($list), "rows" => $list);
 
             return json($result);
         }
-        return $this->view->fetch();
+        return $this->view->fetch('bluewhale/attr/index');
     }
 
 
     /**
      * 添加
      */
-    public function add($obj = null)
+    public function add()
     {
         if ($this->request->isPost()) {
             $res =$this->model->save();
@@ -64,24 +89,12 @@ class Unique extends Backend
             if($res['bk_error_msg']  == 'success'){
                 $this->success();
             }else{
-                $this->error(__('Parameter %s can not be empty', ''));
+                $this->error($res['bk_error_msg']);
             }
         }
-        $item = array(
-            'belong' =>'belong(属于)',
-            'group' => 'group(组成)',
-            'run' => 'run(运行)',
-            'connect' => 'connect(上联)',
-            'default' => 'default(默认关联)',
-        );
-        $mapping = array(
-            '1:1' =>'1-1',
-            '1:n' => '1-N',
-            'n:n' => 'N-N'
-        );
-        $this->view->assign("item",$item);
-        $this->view->assign("mapping",$mapping);
-        $this->view->assign("obj",$obj);
+        $objAttr = $this->model->objectAttr();
+        $objAttr = \GuzzleHttp\json_decode($objAttr,true);
+        $this->view->assign("objAttr",$objAttr['data']);
         return $this->view->fetch();
     }
 
@@ -89,35 +102,63 @@ class Unique extends Backend
     /**
      * 编辑
      */
-    public function edit($ids = null, $obj=null)
+    public function edit($ids = null)
     {
-        $row = $this->model->read((int)$ids,$obj);
-        $row = \GuzzleHttp\json_decode($row,true);
-        $row = $row['data'][0];
-        if (!$row) {
+        $objUnique = $this->model->index();
+        $objUnique = \GuzzleHttp\json_decode($objUnique,true);
+        $objUnique = $objUnique['data'];
+        $flag = false;
+        $row = [] ;
+        foreach ($objUnique as $value) {
+            if ($value['id'] == $ids) {
+                foreach ($value['keys'] as $val) {
+                    $row['ids'][] = $val['key_id'];
+                    $flag = true;
+                }
+                $row['must_check'] = $value['must_check'];
+                break;
+            }
+        }
+        if (!$flag) {
             $this->error(__('No Results were found'));
         }
-        $adminIds = $this->getDataLimitAdminIds();
-        if (is_array($adminIds)) {
-            if (!in_array($row[$this->dataLimitField], $adminIds)) {
-                $this->error(__('You have no permission'));
+
+        $objAttr = $this->model->objectAttr();
+        $objAttr = \GuzzleHttp\json_decode($objAttr,true);
+        $objAttr = $objAttr['data'];
+        foreach ($objAttr as $key=>&$value){
+            if(in_array($value['id'], $row['ids'])){
+                $value['selected'] = 'selected';
+            }else{
+                $value['selected'] = '';
             }
         }
         if ($this->request->isPost()) {
             $params = $this->request->post("row/a");
             if ($params) {
+                $newData = [];
+                foreach ($params['bk_id'] as $val){
+                    $newData['keys'][] = array(
+                        'key_kind' => 'property',
+                        'key_id'=> (int)$val
+                    );
+                }
+                $bool = $params['must_check'] === 'yes' ? true :false;
+                $newData['must_check'] = $bool;
+                $this->request->input = \GuzzleHttp\json_encode($newData);
                 $res =$this->model->update((int)$ids);
                 $res =\GuzzleHttp\json_decode($res,true);
                 if($res['bk_error_msg']  == 'success'){
                     $this->success();
                 }else{
-                    $this->error(__('No rows were updated'));
+                    $this->error($res['bk_error_msg']);
                 }
 
             }
             $this->error(__('Parameter %s can not be empty', ''));
         }
         $this->view->assign("row", $row);
+        $this->view->assign("objAttr", $objAttr);
         return $this->view->fetch();
     }
 
@@ -133,7 +174,7 @@ class Unique extends Backend
         if($res['bk_error_msg']  == 'success'){
             $this->success();
         }else{
-            $this->error(__('No rows were deleted'));
+            $this->error($res['bk_error_msg']);
         }
     }
 
@@ -146,12 +187,45 @@ class Unique extends Backend
                 if($res['bk_error_msg']  == 'success'){
                     $this->success();
                 }else{
-                    $this->error(__('No rows were deleted'));
+                    $this->error($res['bk_error_msg']);
                 }
 
             }
             $this->error(__('Parameter %s can not be empty', ''));
         }
+    }
+
+    protected function getUnique()
+    {
+        $objUnique = $this->model->index();
+        $objAttr = $this->model->objectAttr();
+
+        $objUnique = \GuzzleHttp\json_decode($objUnique,true);
+        $objAttr = \GuzzleHttp\json_decode($objAttr,true);
+
+        $objUnique = $objUnique['data'];
+        $objAttr   = $objAttr['data'];
+
+        $idArr = [];
+        foreach ($objAttr as $value){
+            $idArr[$value['id']] = $value['bk_property_name'];
+        }
+        $list = [];
+        foreach ($objUnique as $key=>$uniqueArr){
+            $arr = [];
+            $arr['must_check'] = $uniqueArr['must_check'];
+            $idKey = '';
+            $name = '';
+            foreach ($uniqueArr['keys'] as $val){
+                $idKey .= $val['key_id'].'_';
+                $name .= $idArr[$val['key_id']].'+';
+            }
+            $arr['ids'] = trim($idKey,'_');
+            $arr['id'] = $uniqueArr['id'];
+            $arr['name'] = trim($name,'+');
+            $list[] = $arr;
+        }
+        return $list;
     }
 
 

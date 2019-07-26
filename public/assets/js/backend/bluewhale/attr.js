@@ -116,7 +116,12 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form','cmdbIcon'], function 
                     search: false,
                     columns: [
                         [
-                            {field: 'isrequired', title: __('bk_require')},
+                            {field: 'isrequired', title: __('bk_require'),
+                                formatter: function (value,row) {
+                                    if (value === true) return '√';
+                                    if (value === false) return '×';
+                                }
+                            },
                             {field: 'bk_property_id', title: __('bk_id')},
                             {field: 'bk_property_name', title: __('bk_name')},
                             {field: 'bk_property_type', title: __('bk_type')},
@@ -174,11 +179,11 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form','cmdbIcon'], function 
                 // 表格4
                 var table4 = $("#table4");
                 table4.bootstrapTable({
-                    url: 'bluewhale/attr/table4/obj/'+Controller.config.bk_obj_id,
+                    url: 'bluewhale/attr/table4/obj/' + Controller.config.bk_obj_id,
                     extend: {
-                        index_url: 'bluewhale/attr/table4/obj/'+Controller.config.bk_obj_id,
-                        add_url: 'bluewhale/association/add/obj/'+Controller.config.bk_obj_id,
-                        edit_url: 'bluewhale/association/edit/obj/'+Controller.config.bk_obj_id,
+                        index_url: 'bluewhale/attr/table4/obj/' + Controller.config.bk_obj_id,
+                        add_url: 'bluewhale/association/add/obj/' + Controller.config.bk_obj_id,
+                        edit_url: 'bluewhale/association/edit/obj/' + Controller.config.bk_obj_id,
                         del_url: 'bluewhale/association/del',
                     },
                     toolbar: '#toolbar4',
@@ -193,6 +198,45 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form','cmdbIcon'], function 
 
                 // 为表格4绑定事件
                 Table.api.bindevent(table4);
+            },
+            third: function () {
+                // 表格3
+                var table3 = $("#table3");
+                table3.bootstrapTable({
+                    url: 'bluewhale/unique/index/obj/'+Controller.config.bk_obj_id,
+                    extend: {
+                        index_url: 'bluewhale/unique/table3/obj/'+Controller.config.bk_obj_id,
+                        add_url: 'bluewhale/unique/add/obj/'+Controller.config.bk_obj_id,
+                        edit_url: 'bluewhale/unique/edit/obj/'+Controller.config.bk_obj_id,
+                        del_url: 'bluewhale/unique/del/obj/'+Controller.config.bk_obj_id
+                    },
+                    toolbar: '#toolbar3',
+                    sortName: 'id',
+                    bk_obj_id: Controller.config.bk_obj_id,
+                    search: false,
+                    columns: [
+                        [
+                            {field: 'name', title: __('bk_obj_asst_id')},
+                            {field: 'id', title: __('bk_asst_id')},
+                            {field: 'must_check', title: __('must_check'),
+                                formatter: function (value,row) {
+                                    if (value === true) return '是';
+                                    if (value === false) return '否';
+                                }
+                            },
+                            {
+                                field: 'operate',
+                                title: __('Operate'),
+                                table: table3,
+                                events: Table.api.events.operate,
+                                formatter: Table.api.formatter.operate
+                            }
+                        ]
+                    ]
+                });
+
+                // 为表格2绑定事件
+                Table.api.bindevent(table3);
             },
         },
         add: function () {

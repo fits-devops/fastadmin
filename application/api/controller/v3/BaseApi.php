@@ -40,4 +40,13 @@ class BaseApi extends Api
         }
     }
 
+    public function is_json($data = '', $assoc = false)
+    {
+        $data = json_decode($data, $assoc);
+        if (($data && (is_object($data))) || (is_array($data) && !empty($data))) {
+            return true;
+        }
+        return false;
+    }
+
 }

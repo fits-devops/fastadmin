@@ -55,6 +55,7 @@
             <div class="tab-pane fade" id="third">
                 <div id="toolbar3" class="toolbar">
                     {:build_toolbar('refresh')}
+                    <a href="javascript:;" class="btn btn-success btn-add {:$auth->check('bluewhale/unique/add')?'':'hide'}" title="{:__('Add')}" ><i class="fa fa-plus"></i>新建校验</a>
                 </div>
                 <table id="table3" class="table table-striped table-bordered table-hover" width="100%">
                 </table>

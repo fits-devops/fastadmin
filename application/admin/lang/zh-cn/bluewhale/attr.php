@@ -16,4 +16,5 @@ return [
     'bk_asst_obj_id'   => '目标模型',
     'bk_asst_id'   => '关联类型',
     'mapping'   => '源-目标约束',
+    'must_check'   => '是否为必须校验',
 ];

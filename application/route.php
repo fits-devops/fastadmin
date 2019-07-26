@@ -7,6 +7,8 @@ Route::group('api',function (){
         Route::resource('classification','api/:version.Classification');
         Route::get('model/:bk_obj_id','api/:version.Model/read');
         Route::resource('attribute','api/:version.Attribute');
+        Route::resource('unique','api/:version.Unique');
+        Route::put('unique/id/:id/obj/:obj','api/:version.Unique/update');
 
     });
 
