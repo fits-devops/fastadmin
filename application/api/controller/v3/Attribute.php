@@ -76,6 +76,7 @@ class Attribute extends BaseApi
     {
 
         $params = $this->request->post("row/a");
+        $this->typeChange($params);
         $url = config('fastadmin.cmdb_api_url')."/object/attr/".$id;
         return  self::sendRequest($url, \GuzzleHttp\json_encode($params), 'PUT');
     }
@@ -114,11 +115,20 @@ class Attribute extends BaseApi
         $params = $this->request->post("row/a");
         $params['bk_property_group'] = 'default';
         $params['creator'] = 'admin';
+        $this->typeChange($params);
+        $url = config('fastadmin.cmdb_api_url').$this->path;
+        return  self::sendRequest($url,\GuzzleHttp\json_encode($params));
+    }
+
+    protected function typeChange(&$params)
+    {
         if(in_array($params['bk_property_type'],array("float","int"))){
-            $params['option']['max'] = $params['max'];
-            $params['option']['min'] = $params['min'];
-            unset($params['max']);
-            unset($params['min']);
+            if(isset($params['max']) && isset($params['min'])) {
+                $params['option']['max'] = $params['max'];
+                $params['option']['min'] = $params['min'];
+                unset($params['max']);
+                unset($params['min']);
+            }
         }
         if($params['bk_property_type'] === 'enum'){
             if(isset($params['comment'])){
@@ -131,8 +141,8 @@ class Attribute extends BaseApi
                 unset($params['comment']);
             }
         }
-        $url = config('fastadmin.cmdb_api_url').$this->path;
-        return  self::sendRequest($url,\GuzzleHttp\json_encode($params));
+        $params['editable'] = isset($params['editable']) ? true :false;
+        $params['isrequired'] = isset($params['isrequired']) ? true :false;
     }
 
 

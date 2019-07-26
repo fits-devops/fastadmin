@@ -23,6 +23,12 @@ class Attr extends Backend
 
     protected $obj = '';
 
+    protected $typeArr = array(
+        'singlechar' =>'短字符',
+        'int' => '数字',
+        'float' => '浮点数',
+        'enum' => '枚举'
+    );
 
     public function _initialize()
     {
@@ -172,14 +178,8 @@ class Attr extends Backend
                 $this->error(__('Parameter %s can not be empty', ''));
             }
         }
-        $item = array(
-            'singlechar' =>'短字符',
-            'int' => '数字',
-            'float' => '浮点数',
-            'enum' => '枚举'
-        );
         $obj = $this->request->param('obj', 'host');
-        $this->view->assign("item",$item);
+        $this->view->assign("typeArr",$this->typeArr);
         $this->view->assign("obj",$obj);
         return $this->view->fetch();
     }
@@ -210,12 +210,27 @@ class Attr extends Backend
                 if($res['bk_error_msg']  == 'success'){
                     $this->success();
                 }else{
-                    $this->error(__('No rows were deleted'));
+                    $this->error(__('No rows were updated'));
                 }
 
             }
             $this->error(__('Parameter %s can not be empty', ''));
         }
+        $option = array();
+        if($row['bk_property_type'] === 'enum'){
+            if(isset($row['option'])){
+                foreach ($row['option'] as $key=>$value) {
+                    $option[$value['id']] = $value['name'];
+                }
+                unset($row['option']);
+            }
+        }
+        $max = isset($row['option']['max']) ? true : false;
+        $min = isset($row['option']['min']) ? true : false;
+        $this->view->assign("typeArr",$this->typeArr);
+        $this->view->assign("max",$max);
+        $this->view->assign("min",$min);
+        $this->view->assign("option",\GuzzleHttp\json_encode($option));
         $this->view->assign("row", $row);
         return $this->view->fetch();
     }

@@ -92,6 +92,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form','cmdbIcon'], function 
 
 
             });
+
         },
         table:{
             first: function () {
@@ -115,12 +116,10 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form','cmdbIcon'], function 
                     search: false,
                     columns: [
                         [
-                            {checkbox: true},
-                            {field: 'id', title: __('Id') , operate:false},
-                            {field: 'bk_property_id', title: __('bk_classification_id')},
-                            {field: 'bk_property_type', title: __('bk_classification_name')},
-                            {field: 'isrequired', title: __('bk_classification_type')},
-                            {field: 'bk_property_name', title: __('bk_classification_icon')},
+                            {field: 'isrequired', title: __('bk_require')},
+                            {field: 'bk_property_id', title: __('bk_id')},
+                            {field: 'bk_property_name', title: __('bk_name')},
+                            {field: 'bk_property_type', title: __('bk_type')},
                             {
                                 field: 'operate',
                                 title: __('Operate'),
@@ -152,9 +151,9 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form','cmdbIcon'], function 
                     search: false,
                     columns: [
                         [
-                            {field: 'bk_obj_asst_id', title: __('Title')},
-                            {field: 'bk_asst_id', title: __('Url')},
-                            {field: 'mapping', title: __('ip')},
+                            {field: 'bk_obj_asst_id', title: __('bk_obj_asst_id')},
+                            {field: 'bk_asst_id', title: __('bk_asst_id')},
+                            {field: 'mapping', title: __('mapping')},
                             {field: 'bk_obj_id', title: __('bk_obj_id')},
                             {field: 'bk_asst_obj_id', title: __('bk_asst_obj_id')},
                             {
@@ -197,6 +196,22 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form','cmdbIcon'], function 
             },
         },
         add: function () {
+            // 绑定类型change 事件
+            Controller.typeChange();
+            Controller.numberBlur();
+            Controller.api.bindevent();
+        },
+        edit: function () {
+            Controller.typeChange();
+            Controller.numberBlur();
+            Controller.api.bindevent();
+        },
+        api: {
+            bindevent: function () {
+                Form.api.bindevent($("form[role=form]"));
+            }
+        },
+        typeChange: function () {
             $('body').on('change','#attr_type',function () {
                 var $this = $(this);
                 var  val = $this.val();
@@ -208,21 +223,21 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form','cmdbIcon'], function 
                 // 枚举
                 if(val === 'enum'){
                     $(".form-enum-wrapper").removeClass('hidden');
+                    $("input[name='row[isrequired]']").parent().addClass('hidden');
                 }else{
                     $(".form-enum-wrapper").addClass('hidden');
+                    $("input[name='row[isrequired]']").parent().removeClass('hidden');
                 }
             });
-
-
-            Controller.api.bindevent();
+            $("#attr_type").val($("#attr_type").val()).trigger('change');
         },
-        edit: function () {
-            Controller.api.bindevent();
-        },
-        api: {
-            bindevent: function () {
-                Form.api.bindevent($("form[role=form]"));
-            }
+        numberBlur: function () {
+            // 监控最大值 和 最小值
+            $("body").on('blur',"#number_min,#number_max",function () {
+                if(( $("#number_min").val() > $("#number_max").val() ) && $("#number_max").val() > 0){
+                    console.log('ddddddd')
+                }
+            });
         }
     };
     return Controller;
