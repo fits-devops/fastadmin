@@ -67,10 +67,15 @@ class Model extends BaseApi
      */
     public function update($id)
     {
-        $params_json = \GuzzleHttp\json_encode($this->request->post("row/a"),JSON_UNESCAPED_UNICODE);
-        $url = config('fastadmin.cmdb_api_url')."/object/classification/".$id;
+        $content = $this->request->getInput();
+        if($this->is_json($content)){
+            $params_json = $content;
+        }else{
+            $params_json = \GuzzleHttp\json_encode($this->request->post("row/a"),JSON_UNESCAPED_UNICODE);
+        }
+
+        $url = config('fastadmin.cmdb_api_url')."/update/object/".$id;
         $result = self::sendRequest($url,$params_json, 'PUT');
-//        $result = json_decode($datas_json,true);
         return  $result;
     }
 
