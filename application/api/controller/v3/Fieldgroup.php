@@ -10,7 +10,7 @@ use think\Request;
 /**
  * 字段分组
  */
-class AttributeGroup extends BaseApi
+class Fieldgroup extends BaseApi
 {
 
     //如果$noNeedLogin为空表示所有接口都需要登录才能请求
@@ -119,8 +119,14 @@ class AttributeGroup extends BaseApi
     public function attrChangeGroup(){
 
         $params = $this->request->post("row/a");
-        $url = config('fastadmin.cmdb_api_url').$this->path.'/property';
-        return  self::sendRequest($url, $params, 'PUT');
+        if(isset($params['data'])){
+            foreach ($params['data'] as &$val){
+                $val['data']['bk_property_index'] = (int)$val['data']['bk_property_index'];
+            }
+        }
+        $url = config('fastadmin.cmdb_api_url').'/objectatt/group/property';
+        return self::sendRequest($url, \GuzzleHttp\json_encode($params), 'PUT');
+
      }
 
 
