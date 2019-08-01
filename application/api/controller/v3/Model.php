@@ -52,10 +52,8 @@ class Model extends BaseApi
     public function delete($id)
     {
 
-        $url = config('fastadmin.cmdb_api_url')."/object/classification/".$id;
-        $result = self::sendRequest($url, $params=[], 'DELETE');
-//        $result = json_decode($datas_json,true);
-        return  $result;
+        $url = config('fastadmin.cmdb_api_url')."/delete/object/".$id;
+        return self::sendRequest($url, $params=[], 'DELETE');
     }
 
     /**
@@ -71,7 +69,15 @@ class Model extends BaseApi
         if($this->is_json($content)){
             $params_json = $content;
         }else{
-            $params_json = \GuzzleHttp\json_encode($this->request->post("row/a"),JSON_UNESCAPED_UNICODE);
+            $params = $this->request->post("row/a");
+            if(isset($params['bk_ispaused'])){
+                if($params['bk_ispaused'] == 'true'){
+                    $params['bk_ispaused'] = true;
+                }else{
+                    $params['bk_ispaused'] = false;
+                }
+            }
+            $params_json = \GuzzleHttp\json_encode($params,JSON_UNESCAPED_UNICODE);
         }
 
         $url = config('fastadmin.cmdb_api_url')."/update/object/".$id;
