@@ -113,4 +113,16 @@ class Classification extends BaseApi
         $result = self::sendRequest($url, $params_json);
         return  $result;
     }
+    /**
+     * @ApiTitle    (模型分组)
+     * @ApiSummary  (模型分组列表)
+     * @ApiMethod   (POST)
+     * @ApiRoute    (/api/v3/Classification/classifications)
+     * 这里返回的是josn字符串
+     */
+    public function classifications()
+    {
+        $url = config('fastadmin.cmdb_api_url')."/object/classifications";
+        return self::sendRequest($url);
+    }
 }

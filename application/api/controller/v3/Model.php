@@ -115,7 +115,7 @@ class Model extends BaseApi
     public function save()
     {
         $params_json = \GuzzleHttp\json_encode($this->request->post("row/a"),JSON_UNESCAPED_UNICODE);
-        $url = config('fastadmin.cmdb_api_url')."/object/classification";
+        $url = config('fastadmin.cmdb_api_url')."/object";
         $result = self::sendRequest($url, $params_json);
         return  $result;
     }
