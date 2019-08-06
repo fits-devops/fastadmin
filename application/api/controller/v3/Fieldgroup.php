@@ -52,7 +52,7 @@ class FieldGroup extends BaseApi
     public function delete($id)
     {
 
-        $url = config('fastadmin.cmdb_api_url')."/delete/objectattgroup/".$id;
+        $url = config('fastadmin.cmdb_api_url')."/object/classification/".$id;
         $result = self::sendRequest($url, $params=[], 'DELETE');
 //        $result = json_decode($datas_json,true);
         return  $result;
@@ -134,6 +134,7 @@ class FieldGroup extends BaseApi
 
     }
 
+
     /**
      * @ApiTitle    改变字段分组名称
      * @ApiSummary  改变字段分组名称
@@ -153,4 +154,5 @@ class FieldGroup extends BaseApi
         return self::sendRequest($url, $params, 'PUT');
 
     }
+
 }

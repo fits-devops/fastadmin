@@ -30,14 +30,13 @@ class Attribute extends BaseApi
     public function _initialize()
     {
         parent::_initialize();
-        $this->bk_obj_id = 'cc_test_inst';
     }
 
     /**
-     * @ApiTitle    (获取插件列表)
-     * @ApiSummary  (获取插件商店的插件列表信息)
+     * @ApiTitle    (获取模型字段)
+     * @ApiSummary  (获取模型字段列表信息)
      * @ApiMethod   (GET)
-     * @ApiRoute    (/api/V3/Model/index)
+     * @ApiRoute    (/api/V3/Attribute/index/obj/host)
      */
     public function index()
     {
@@ -51,11 +50,10 @@ class Attribute extends BaseApi
     }
 
     /**
-     * @ApiTitle    (获取插件列表)
-     * @ApiSummary  (获取插件商店的插件列表信息)
+     * @ApiTitle    (删除某个字段)
      * @ApiMethod   (DELETE)
      * @ApiParams   (name="id", type="integer", required=true, description="模型ID")
-     * @ApiRoute    (/api/v3/Model/{id})
+     * @ApiRoute    (/api/v3/Attribute/{id})
      * 这里返回的是data数组
      */
     public function delete($id)
@@ -66,11 +64,15 @@ class Attribute extends BaseApi
     }
 
     /**
-     * @ApiTitle    (获取插件列表)
-     * @ApiSummary  (获取插件商店的插件列表信息)
+     * @ApiTitle    (更新某个字段的值)
      * @ApiMethod   (PUT)
-     * @ApiRoute    (/api/v3/Model/{id})
-     * 这里返回的是data数组
+     * @ApiRoute    (/api/v3/Attribute/{id})
+     * @ApiReturn   ({
+            "result": true,
+            "bk_error_code": 0,
+            "bk_error_msg": null,
+            "data": "success"
+    })
      */
     public function update($id)
     {
@@ -82,12 +84,35 @@ class Attribute extends BaseApi
     }
 
     /**
-     * @ApiTitle    (获取插件列表)
-     * @ApiSummary  (获取插件商店的插件列表信息)
+     * @ApiTitle    (读取模型某个字段)
      * @ApiMethod   (GET)
      * @ApiParams   (name="bk_obj_id", type="string", required=true, description="对象模型的ID，只能用英文字母序列命名")
-     * @ApiRoute    (/api/v3/Model/{id})
-     * 这里返回的是data数组
+     * @ApiRoute    (/api/v3/Model/{id}/obj/{bk_obj_id})
+     * @ApiReturn   (
+     *     {
+            "result": true,
+            "bk_error_code": 0,
+            "bk_error_msg": null,
+            "data": [
+            {
+            "bk_classification_id": "bk_organization",
+            "create_time": "2018-03-08T11:30:28.005+08:00",
+            "creator": "cc_system",
+            "description": "",
+            "id": 4,
+            "bk_ispaused": false,
+            "ispre": true,
+            "last_time": null,
+            "modifier": "",
+            "bk_obj_icon": "icon-XXX",
+            "bk_obj_id": "XX",
+            "bk_obj_name": "XXX",
+            "position": "{\"test_obj\":{\"x\":-253,\"y\":137}}",
+            "bk_supplier_account": "0"
+            }
+            ]
+    }
+     * )
      */
     public function read($id)
     {
@@ -102,12 +127,18 @@ class Attribute extends BaseApi
     }
 
     /**
-     * @ApiTitle    (获取插件列表)
-     * @ApiSummary  (获取插件商店的插件列表信息)
-     * @ApiMethod   (GET)
+     * @ApiTitle    (模型字段保存)
+     * @ApiMethod   (POST)
      * @ApiParams   (name="bk_obj_id", type="string", required=true, description="对象模型的ID，只能用英文字母序列命名")
-     * @ApiRoute    (/api/v3/Model/{id})
-     * 这里返回的是data数组
+     * @ApiRoute    (/api/v3/Model/{id})、
+     * @ApiReturn   ({
+            "result": true,
+            "bk_error_code": 0,
+            "bk_error_msg": null,
+            "data": {
+            "id": 1038
+            }
+     * })
      */
     public function save()
     {
