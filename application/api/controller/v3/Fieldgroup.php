@@ -114,19 +114,20 @@ class FieldGroup extends BaseApi
     }
 
     /**
-     * @ApiTitle    (字段改变分组)
-     * @ApiSummary  (字段改变分组)
+     * @ApiTitle    (改变字段所在分组)
+     * @ApiSummary  (改变字段所在分组)
      * @ApiMethod   (PUT)
-     * @ApiParams   (name="bk_obj_id", type="string", required=true, description="对象模型的ID，只能用英文字母序列命名")
-     * @ApiRoute    (/api/v3/Model/{id})
+     * @ApiParams   (Array)
+     * @ApiRoute
      * 这里返回的是data数组
      */
-    public function attrChangeGroup(){
-
-        $params = $this->request->post("row/a");
-        if(isset($params['data'])){
-            foreach ($params['data'] as &$val){
-                $val['data']['bk_property_index'] = (int)$val['data']['bk_property_index'];
+    public function attrChangeGroup($params=null){
+        if($params==null){
+            $params = $this->request->post("row/a");
+            if(isset($params['data'])){
+                foreach ($params['data'] as &$val){
+                    $val['data']['bk_property_index'] = (int)$val['data']['bk_property_index'];
+                }
             }
         }
         $url = config('fastadmin.cmdb_api_url').'/objectatt/group/property';
