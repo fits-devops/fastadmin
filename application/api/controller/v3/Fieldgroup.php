@@ -143,6 +143,7 @@ class FieldGroup extends BaseApi
      * 这里返回的是json
      */
     public function editGroupName(){
+
         $paramsArr = $this->request->post("row/a");
         if(isset($paramsArr['condition']['id'])){
             $paramsArr['condition']['id'] = intval( $paramsArr['condition']['id']);
