@@ -7,7 +7,7 @@ namespace app\api\controller\v3;
 /**
  * 字段分组
  */
-class FieldGroup extends BaseApi
+class Fieldgroup extends BaseApi
 {
 
     //如果$noNeedLogin为空表示所有接口都需要登录才能请求
@@ -42,19 +42,17 @@ class FieldGroup extends BaseApi
     }
 
     /**
-     * @ApiTitle    (获取插件列表)
-     * @ApiSummary  (获取插件商店的插件列表信息)
+     * @ApiTitle    (删除分组)
+     * @ApiSummary  (删除分组)
      * @ApiMethod   (DELETE)
-     * @ApiParams   (name="id", type="integer", required=true, description="模型ID")
      * @ApiRoute    (/api/v3/Model/{id})
      * 这里返回的是json
      */
     public function delete($id)
     {
 
-        $url = config('fastadmin.cmdb_api_url')."/object/classification/".$id;
+        $url = config('fastadmin.cmdb_api_url')."/delete/objectattgroup/".$id;
         $result = self::sendRequest($url, $params=[], 'DELETE');
-//        $result = json_decode($datas_json,true);
         return  $result;
     }
 
