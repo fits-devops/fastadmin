@@ -112,47 +112,4 @@ class FieldGroup extends BaseApi
         $result = self::sendRequest($url, $params);
         return  $result;
     }
-
-    /**
-     * @ApiTitle    (字段改变分组)
-     * @ApiSummary  (字段改变分组)
-     * @ApiMethod   (PUT)
-     * @ApiParams   (name="bk_obj_id", type="string", required=true, description="对象模型的ID，只能用英文字母序列命名")
-     * @ApiRoute    (/api/v3/Model/{id})
-     * 这里返回的是data数组
-     */
-    public function attrChangeGroup(){
-
-        $params = $this->request->post("row/a");
-        if(isset($params['data'])){
-            foreach ($params['data'] as &$val){
-                $val['data']['bk_property_index'] = (int)$val['data']['bk_property_index'];
-            }
-        }
-        $url = config('fastadmin.cmdb_api_url').'/objectatt/group/property';
-        return self::sendRequest($url, \GuzzleHttp\json_encode($params), 'PUT');
-
-    }
-
-
-    /**
-     * @ApiTitle    改变字段分组名称
-     * @ApiSummary  改变字段分组名称
-     * @ApiMethod   (PUT)
-     * @ApiParams
-     * @ApiRoute
-     * 这里返回的是json
-     */
-    public function editGroupName(){
-
-        $paramsArr = $this->request->post("row/a");
-        if(isset($paramsArr['condition']['id'])){
-            $paramsArr['condition']['id'] = intval( $paramsArr['condition']['id']);
-        }
-        $params = \GuzzleHttp\json_encode($paramsArr,JSON_UNESCAPED_UNICODE);
-        $url = config('fastadmin.cmdb_api_url').'/objectatt/group/update';
-        return self::sendRequest($url, $params, 'PUT');
-
-    }
-
 }
