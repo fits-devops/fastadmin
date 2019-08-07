@@ -1037,7 +1037,7 @@ input.cmdb-form-input {
 }
 
 .icon-box{
-  padding: 15px 10px 0 10px;
+  padding: 0 10px 0 10px;
   width: 100%;
   height: calc(100% - 60px);
 }
@@ -1146,7 +1146,7 @@ li {list-style-type:none;}
   font-style: normal;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+[class*="icon-cc"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
   speak: none;
