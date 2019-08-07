@@ -1,0 +1,31 @@
+<link href="/assets/addons/modelmanage/css/modelmanage.css" rel="stylesheet">
+<form id="add-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+    <div class="form-groupadd">
+        <!--<div  class="dialog-content"><div  class="dialog-filter">-->
+            <!--<input  type="text" class="cmdb-form-input">-->
+            <!--<i  class="bk-icon icon-search"></i>-->
+        </div>
+            <ul  class="dialog-property clearfix" style="height: 87.3333px;">
+                <?php foreach ($datas as $k=>$v):?>
+                <li  class="proper-groupadd-item fl">
+                    <input data-id="{$v.id|htmlentities}" name="row[ids][]" value="{$v.id|htmlentities}" type="checkbox">
+                    <input  class="form-control display-none" name="row[datas][{$v.id|htmlentities}][id]" type="text" value="{$v.id|htmlentities}">
+                    <input  class="form-control display-none" name="row[datas][{$v.id|htmlentities}][bk_obj_id]" type="text" value="{$v.bk_obj_id|htmlentities}">
+                    <input   class="form-control display-none" name="row[datas][{$v.id|htmlentities}][bk_property_id]" type="text" value="{$v.bk_property_id|htmlentities}">
+                    <input   class="form-control display-none" name="row[datas][{$v.id|htmlentities}][bk_property_group]" type="text" value="{$v.bk_property_group|htmlentities}">
+                    <input   class="form-control display-none" name="row[datas][{$v.id|htmlentities}][bk_property_index]" type="text" value="{$v.bk_property_index|htmlentities}">
+                    <input   class="form-control display-none" name="row[datas][{$v.id|htmlentities}][bk_property_name]" type="text" value="{$v.bk_property_name|htmlentities}">
+                    <label  title="{$v.bk_property_name|htmlentities}" class="property-label">{$v.bk_property_name|htmlentities}</label>
+                </li>
+                <?php endforeach?>
+            </ul>
+        </div>
+
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed ">{:__('OK')}</button>
+        </div>
+    </div>
+        </div>
+</form>

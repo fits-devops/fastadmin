@@ -1,0 +1,29 @@
+<form id="add-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">校验规则:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select name="row[bk_id][]" class="form-control selectpicker"  multiple="true">
+                {foreach name="objAttr" item="vo"}
+                <option value="{$vo.id}" {$vo.selected} >{$vo.bk_property_name}</option>
+                {/foreach}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">是否为必须校验:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="radio">
+                <label for="row[status]-normal"><input id="row[status]-normal" {$row.must_check == true ? 'checked' : ''} name="row[must_check]" type="radio" value="yes"> 是</label>
+                <label for="row[status]-hidden"><input id="row[status]-hidden" {$row.must_check == false ? 'checked' : ''} name="row[must_check]" type="radio" value="no"> 否</label></div>
+        </div>
+    </div>
+
+    <div class="form-group layer-footer">
+        <label class="control-label col-xs-12 col-sm-2"></label>
+        <div class="col-xs-12 col-sm-8">
+            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
+        </div>
+    </div>
+</form>
