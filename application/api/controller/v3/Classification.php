@@ -59,8 +59,8 @@ class Classification extends BaseApi
     }
 
     /**
-     * @ApiTitle    (获取插件列表)
-     * @ApiSummary  (获取插件商店的插件列表信息)
+     * @ApiTitle    (更新模型分组名称)
+     * @ApiSummary  (更新模型分组名称)
      * @ApiMethod   (PUT)
      * @ApiRoute    (/api/v3/Model/{id})
      * 这里返回的是json
@@ -74,7 +74,8 @@ class Classification extends BaseApi
             $params_json = \GuzzleHttp\json_encode($this->request->post("row/a"),JSON_UNESCAPED_UNICODE);
         }
 
-        $url = config('fastadmin.cmdb_api_url')."/update/object/".$id;
+        $url = config('fastadmin.cmdb_api_url')."/update/objectclassification/".$id;
+//        $this->error( $url);
         $result = self::sendRequest($url,$params_json, 'PUT');
         return  $result;
     }
