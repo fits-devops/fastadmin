@@ -39,7 +39,7 @@
 
         <div class="collapse navbar-collapse" id="navbar-collapse-menu">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/index/index" target="_blank">{:__('Home')}</a></li>
+                <li><a href="/index/index" >{:__('Home')}</a></li>
                 <li><a href="/index/index/features" >{:__('features')}</a></li>
                 <li><a href="/api.html" target="_blank">{:__('API Docs')}</a></li>
                 <li><a href="https://www.fastadmin.net/service.html" target="_blank">{:__('manual')}</a></li>
@@ -51,23 +51,68 @@
 </nav>
 
 <header>
+<section id="features" class="features" >
     <div class="container">
         <div class="row">
-            <div class="col-sm-12">
-                <div class="header-content">
-                    <div class="header-content-inner">
-                        <h1>{:__('iCenter IT Resource management centre')}</h1>
-                        <h3>{:__('Simple, efficient, full life cycle CMDB management system')}</h3>
-                        <a href="{:url('admin/index/login')}" class="btn btn-warning btn-xl page-scroll">{:__('Go to Dashboard')}</a>
-                        <!--<p>&copy; 2017-2019 <a href="http://www.funtech.com.cn/" target="_blank">iCenter</a>. All Rights Reserved.</p>-->
+            <div class="col-lg-12 text-center">
+                <div class="section-heading">
+                    <h2>{:__('Features')}</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="feature-item">
+                                <i class="icon-user text-primary"></i>
+                                <h3>{:__('first tips')}</h3>
+                                <!--<p class="text-muted">{:__('first tips')}</p>-->
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="feature-item">
+                                <i class="icon-screen-desktop text-primary"></i>
+                                <h3>{:__('second tips')}</h3>
+                                <!--<p class="text-muted">{:__('second tips')}</p>-->
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="feature-item">
+                                <i class="icon-arrow-down-circle text-primary"></i>
+                                <h3>{:__('third tips')}</h3>
+                                <!--<p class="text-muted">{:__('third tips')}</p>-->
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="feature-item">
+                                <i class="icon-layers text-primary"></i>
+                                <h3>{:__('forth tips')}</h3>
+                                <!--<p class="text-muted">{:__('forth tips')}</p>-->
+                            </div>
+                        </div>
+                        <!--<div class="col-md-4">-->
+                            <!--<div class="feature-item">-->
+                                <!--<i class="icon-docs text-primary"></i>-->
+                                <!--<h3>{:__('CRUD')}</h3>-->
+                                <!--<p class="text-muted">{:__('CRUD tips')}</p>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="col-md-4">-->
+                            <!--<div class="feature-item">-->
+                                <!--<i class="icon-puzzle text-primary"></i>-->
+                                <!--<h3>{:__('Extension')}</h3>-->
+                                <!--<p class="text-muted">{:__('Extension tips')}</p>-->
+                            <!--</div>-->
+                        <!--</div>-->
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</section>
 </header>
-
-
 <footer>
     <div class="container">
         <!-- FastAdmin是开源程序，建议在您的网站底部保留一个FastAdmin的链接 -->

@@ -4,8 +4,8 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form', 'template'], function
             // 初始化表格参数配置
             Table.api.init({
                 extend: {
-                    //index_url: Config.fastadmin.api_url + '/addon/index',
-                    index_url: Config.fastadmin.api_addonstore + '/admin/addonstore/getAddonsList',
+                    index_url: 'addon/downloaded',
+                    //index_url: Config.fastadmin.api_addonstore + '/admin/addonstore/getAddonsList',
                     add_url: '',
                     edit_url: '',
                     del_url: '',

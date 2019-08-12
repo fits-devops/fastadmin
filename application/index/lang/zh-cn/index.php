@@ -8,6 +8,10 @@ return [
     'Module tips'     => '控制器、模型、视图、JS一一对应,使用RequireJS进行JS模块化管理,采用Bower进行前端包组件管理',
     'CRUD tips'       => '控制台进行一键生成控制器、模型、视图和JS文件,一键生成API文档,一键生成后台权限节点和菜单栏',
     'Extension tips'  => 'FastAdmin提供强大的扩展中心，可直接在线安装和卸载插件，同时支持命令行一键操作',
+    'first tips'  => '灵活CI配置管理与自动发现能力',
+    'second tips'  => '清晰业务视图表现能力',
+    'third tips'  => '流程管控及权限管理能力',
+    'forth tips'  => '多维度的报表展示能力',
     'Do not hesitate' => '不要犹豫',
     'Start to act'    => '开始行动',
 ];

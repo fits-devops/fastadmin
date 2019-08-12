@@ -22,4 +22,9 @@ class Index extends Frontend
         return jsonp(['newslist' => $newslist, 'new' => count($newslist), 'url' => 'https://www.fastadmin.net?ref=news']);
     }
 
+    public function features(){
+        //http://www.fitsadmin.com/index/index/features
+        return $this->view->fetch();
+    }
+
 }
