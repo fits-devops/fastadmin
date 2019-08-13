@@ -184,7 +184,8 @@ header .device-container .screen img {
     header .header-content {
         text-align: center;
         padding: 0;
-        height: 90vh;
+        height: 89vh;
+         margin-bottom: 3px;
     }
     header .header-content .header-content-inner {
         width:100%;
